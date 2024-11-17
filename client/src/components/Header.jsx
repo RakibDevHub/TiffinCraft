@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-// import { FaHome, FaUsers } from "react-icons/fa";
 import {
   MdHome,
   MdMenuBook,

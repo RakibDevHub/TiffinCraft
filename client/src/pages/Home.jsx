@@ -1,10 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Slider } from "../components/Slider";
 
 export const Home = () => {
   return (
     <>
-      <section className="relative font-body h-[70vh] bg-hero-img bg-cover bg-center bg-no-repeat bg-fixed">
+      <section className="relative font-body h-[80vh] bg-hero-img bg-cover bg-center bg-no-repeat bg-fixed">
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black opacity-50"></div>
 
@@ -69,7 +70,7 @@ export const Home = () => {
           </div>
         </div>
       </section>
-      <section></section>
+      <Slider />
     </>
   );
 };
