@@ -5,4 +5,7 @@
 body {
   margin: 0;
   padding: 0;
+  overflow: hidden;
+  color: #555;
+  scroll-behavior: smooth;
 }

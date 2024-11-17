@@ -44,12 +44,12 @@ const Header = () => {
   return (
     <nav className="flex flex-row justify-between items-center px-8 md:px-12 lg:px-24 shadow-md">
       <img className="h-[60px]" src={logo} alt="TiffinCraft Logo" />
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-row gap-8">
         {navLinks.map((links, index) => (
           <NavLink
             key={index}
             to={links.path}
-            className="flex flex-row justify-between items-center gap-2 py-1 px-4 [&.active]:shadow-md hover:shadow-md rounded-3xl"
+            className="flex flex-row justify-between items-center gap-2 font-heading text-md [&.active]:text-orange-400 hover:text-orange-400 border-orange-400 hover:border-b-2"
           >
             {links.icon}
             {links.name}
