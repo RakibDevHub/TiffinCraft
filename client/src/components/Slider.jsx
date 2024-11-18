@@ -14,7 +14,7 @@ export const Slider = () => {
   const nextRef = useRef(null);
 
   return (
-    <div className="mt-24 px-16 relative">
+    <>
       <Swiper
         slidesPerView={1}
         spaceBetween={20}
@@ -32,19 +32,19 @@ export const Slider = () => {
         }}
         rewind={true}
         modules={[Pagination, Navigation]}
-        className="mySwiper pb-14"
+        className="mySwiper pb-16"
         breakpoints={{
           640: {
-            slidesPerView: 1,
-          },
-          768: {
             slidesPerView: 2,
           },
-          1024: {
+          768: {
             slidesPerView: 3,
           },
-          1280: {
+          1024: {
             slidesPerView: 4,
+          },
+          1280: {
+            slidesPerView: 5,
           },
         }}
       >
@@ -56,7 +56,7 @@ export const Slider = () => {
             <img src={item.itemImage} alt={item.itemName} className="" />
             <div className="py-2 flex flex-col">
               <div className="flex flex-row justify-between items-center mb-2">
-                <span className="flex flex-row items-center gap-1 bg-orange-400 text-white px-2 rounded-md text-sm">
+                <span className="flex flex-row items-center gap-1 bg-orange-400 text-white uppercase px-2 rounded-md text-sm">
                   {item.itemOffer ? (
                     <>
                       <BiSolidOffer /> Up to {item.itemOffer}% off
@@ -73,14 +73,14 @@ export const Slider = () => {
               </h4>
               <p className="font-body leading-tight py-2">{item.itemDetails}</p>
               <span>{item.itemRating}</span>
-              <span className="flex flex-row items-center gap-1 font-bold text-base">
+              <span className="flex flex-row items-center gap-1 py-2 font-bold text-base">
                 <MdStore /> {item.itemVendor}
               </span>
               <div className="flex flex-row justify-between items-center mt-2">
                 <span className="text-3xl text-orange-400">
                   ${item.itemPrice}
                 </span>
-                <button className="flex flex-row items-center justify-center gap-1 font-bold bg-[#6B7280] text-white py-1 px-2 rounded-md hover:bg-[#555]">
+                <button className="flex flex-row items-center justify-center gap-1 font-bold bg-[#113592] text-white py-1 px-2 rounded-md hover:bg-[#002379]">
                   <MdOutlineLocalGroceryStore /> Order Now
                 </button>
               </div>
@@ -90,12 +90,12 @@ export const Slider = () => {
       </Swiper>
 
       {/* Custom Navigation and Pagination Controls */}
-      <div className="flex justify-center items-center mt-4 absolute bottom-2 left-0 right-0 z-50 px-16 space-x-4">
+      <div className="flex justify-center items-center mt-4 absolute bottom-2 left-0 right-0 z-50 px-16 pb-16 space-x-4">
         <button
           ref={prevRef}
-          className="bg-gray-200 p-2 rounded-full hover:bg-gray-300"
+          className="bg-[#113592] p-2 rounded-full hover:bg-[#002379]"
         >
-          <HiOutlineArrowLeft className="text-2xl text-gray-700" />
+          <HiOutlineArrowLeft className="text-2xl text-white" />
         </button>
 
         {/* Custom Pagination Dots */}
@@ -103,12 +103,12 @@ export const Slider = () => {
 
         <button
           ref={nextRef}
-          className="bg-gray-200 p-2 rounded-full hover:bg-gray-300"
+          className="bg-[#113592] p-2 rounded-full hover:bg-[#002379]"
         >
-          <HiOutlineArrowRight className="text-2xl text-gray-700" />
+          <HiOutlineArrowRight className="text-2xl text-white" />
         </button>
       </div>
-    </div>
+    </>
   );
 };
 

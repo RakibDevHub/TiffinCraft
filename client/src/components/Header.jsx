@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-
 import {
   MdHome,
   MdMenuBook,
@@ -8,6 +7,8 @@ import {
   MdInfo,
   MdSupport,
 } from "react-icons/md";
+import { HiOutlineChevronDown } from "react-icons/hi";
+import { RiSearchEyeLine } from "react-icons/ri";
 
 import logo from "../images/TiffinCraft.png";
 
@@ -18,14 +19,20 @@ const navLinks = [
     icon: <MdHome />,
   },
   {
-    name: "Browse Vendors",
-    path: "/vendors",
-    icon: <MdGroups2 />,
-  },
-  {
-    name: "Browes Menus",
-    path: "/menu",
-    icon: <MdMenuBook />,
+    name: "Browse",
+    icon: <RiSearchEyeLine />,
+    dropdown: [
+      {
+        name: "Vendors",
+        path: "/vendors",
+        icon: <MdGroups2 />,
+      },
+      {
+        name: "Menus",
+        path: "/menu",
+        icon: <MdMenuBook />,
+      },
+    ],
   },
   {
     name: "About",
@@ -40,19 +47,63 @@ const navLinks = [
 ];
 
 const Header = () => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  // Function to handle dropdown toggle
+  const handleDropdownToggle = () => {
+    setDropdownOpen((prev) => !prev);
+  };
+
   return (
-    <nav className="flex flex-row justify-between items-center px-8 md:px-12 lg:px-24 shadow-md">
+    <nav className="flex flex-row justify-between items-center px-8 md:px-12 lg:px-24 shadow-md fixed w-full z-50 bg-white">
+      {/* Logo */}
       <img className="h-[60px]" src={logo} alt="TiffinCraft Logo" />
+
+      {/* Navigation Links */}
       <div className="flex flex-row gap-8">
         {navLinks.map((links, index) => (
-          <NavLink
-            key={index}
-            to={links.path}
-            className="flex flex-row justify-between items-center gap-2 font-heading text-md [&.active]:text-orange-400 hover:text-orange-400 border-orange-400 hover:border-b-2"
-          >
-            {links.icon}
-            {links.name}
-          </NavLink>
+          <div key={index} className="relative">
+            {!links.dropdown ? (
+              <NavLink
+                to={links.path}
+                className="flex items-center gap-2 font-heading text-md [&.active]:text-orange-400 hover:text-orange-400"
+              >
+                {links.icon}
+                {links.name}
+              </NavLink>
+            ) : (
+              // Parent link with dropdown
+              <div className="flex flex-col">
+                <button
+                  onClick={handleDropdownToggle}
+                  className="flex items-center gap-2 font-heading text-md hover:text-orange-400 relative"
+                >
+                  {links.icon}
+                  {links.name}
+                  <HiOutlineChevronDown
+                    className={`text-sm transition-transform ${
+                      dropdownOpen ? "rotate-180" : "rotate-0"
+                    }`}
+                  />
+                </button>
+
+                {/* Dropdown Menu */}
+                {dropdownOpen && (
+                  <div className="absolute top-full left-0 mt-2 w-40 border bg-white shadow-lg rounded-md z-50">
+                    {links.dropdown.map((subLink, subIndex) => (
+                      <NavLink
+                        key={subIndex}
+                        to={subLink.path}
+                        className="px-4 py-2 hover:text-orange-400 active:text-orange-400 hover:bg-gray-100 rounded-md flex items-center gap-2"
+                      >
+                        {subLink.icon} {subLink.name}
+                      </NavLink>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         ))}
       </div>
     </nav>

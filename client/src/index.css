@@ -20,7 +20,7 @@ body {
 }
 
 .custom-pagination .swiper-pagination-bullet-active {
-  background-color: #f97316; /* Orange-400 */
+  background-color: #002379; /* Orange-400 */
   opacity: 1;
   transform: scale(1.2); /* Slightly larger active dot */
 }
