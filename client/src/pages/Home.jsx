@@ -55,11 +55,11 @@ export const Home = () => {
                 <input
                   type="text"
                   placeholder="Search for food..."
-                  className="rounded-s-md py-1 px-2 w-full text-[#555] font-medium focus:outline-none"
+                  className="rounded-s-md py-1 px-2 w-full text-[#555] font-body font-medium focus:outline-none"
                 />
                 <button
                   className="
-                  bg-gray-500 text-white font-medium rounded-e-md py-1 px-6 w-[160px]
+                  bg-gray-500 text-white font-bold font-body rounded-e-md py-1 px-6 w-[160px]
                   hover:bg-gray-600 transition duration-300
                 "
                 >
