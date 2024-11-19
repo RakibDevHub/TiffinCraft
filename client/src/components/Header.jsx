@@ -66,7 +66,7 @@ const Header = () => {
             {!links.dropdown ? (
               <NavLink
                 to={links.path}
-                className="flex items-center gap-2 font-heading text-md [&.active]:text-orange-400 hover:text-orange-400"
+                className="flex items-center gap-2 font-heading font-bold text-md [&.active]:text-orange-400 hover:text-orange-400 transition-colors duration-500"
               >
                 {links.icon}
                 {links.name}
@@ -76,12 +76,12 @@ const Header = () => {
               <div className="flex flex-col">
                 <button
                   onClick={handleDropdownToggle}
-                  className="flex items-center gap-2 font-heading text-md hover:text-orange-400 relative"
+                  className="flex items-center gap-2 font-heading font-bold text-md hover:text-orange-400 relative transition-colors duration-500"
                 >
                   {links.icon}
                   {links.name}
                   <HiOutlineChevronDown
-                    className={`text-sm transition-transform ${
+                    className={`text-sm transition-transform duration-500 ${
                       dropdownOpen ? "rotate-180" : "rotate-0"
                     }`}
                   />
@@ -94,7 +94,7 @@ const Header = () => {
                       <NavLink
                         key={subIndex}
                         to={subLink.path}
-                        className="px-4 py-2 hover:text-orange-400 active:text-orange-400 hover:bg-gray-100 rounded-md flex items-center gap-2"
+                        className="font-heading font-bold px-4 py-2 hover:text-orange-400 active:text-orange-400 hover:bg-gray-100 rounded-md flex items-center gap-2 transition-colors duration-500"
                       >
                         {subLink.icon} {subLink.name}
                       </NavLink>
