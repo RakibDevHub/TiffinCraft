@@ -4,8 +4,9 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/swiper-bundle.css";
 
 import { BiSolidOffer, BiHeart } from "react-icons/bi";
-import { MdStore, MdOutlineLocalGroceryStore } from "react-icons/md";
+import { MdStore } from "react-icons/md";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
+import { FaOpencart } from "react-icons/fa";
 
 import imge from "../images/hero.jpeg";
 
@@ -56,7 +57,7 @@ export const Slider = () => {
             <img src={item.itemImage} alt={item.itemName} className="" />
             <div className="py-2 flex flex-col">
               <div className="flex flex-row justify-between items-center mb-2">
-                <span className="flex flex-row items-center gap-1 bg-orange-400 text-white uppercase px-2 rounded-md text-sm">
+                <span className="flex flex-row items-center gap-1 bg-green-400 text-white uppercase px-2 rounded-md text-sm">
                   {item.itemOffer ? (
                     <>
                       <BiSolidOffer /> Up to {item.itemOffer}% off
@@ -80,8 +81,8 @@ export const Slider = () => {
                 <span className="text-3xl text-orange-400">
                   ${item.itemPrice}
                 </span>
-                <button className="flex flex-row items-center justify-center gap-1 font-bold bg-[#113592] text-white py-1 px-2 rounded-md hover:bg-[#002379]">
-                  <MdOutlineLocalGroceryStore /> Order Now
+                <button className="flex flex-row items-center justify-center gap-1 font-bold bg-blue-400 text-white py-1 px-2 rounded-md hover:bg-blue-500">
+                  Order Now <FaOpencart />
                 </button>
               </div>
             </div>
@@ -137,6 +138,24 @@ const itemSlider = [
     itemDetails: "You may combine any of the options above.",
     itemPrice: "80",
     itemOffer: "",
+    itemRating: "No Rating Yet",
+    itemVendor: "Kamal Kitchen",
+  },
+  {
+    itemImage: imge,
+    itemName: "Bhuna Khichuri",
+    itemDetails: "You may combine any of the options above.",
+    itemPrice: "80",
+    itemOffer: "20",
+    itemRating: "No Rating Yet",
+    itemVendor: "Kamal Kitchen",
+  },
+  {
+    itemImage: imge,
+    itemName: "Bhuna Khichuri",
+    itemDetails: "You may combine any of the options above.",
+    itemPrice: "80",
+    itemOffer: "20",
     itemRating: "No Rating Yet",
     itemVendor: "Kamal Kitchen",
   },

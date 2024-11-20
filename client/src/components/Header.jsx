@@ -46,7 +46,7 @@ const navLinks = [
   },
 ];
 
-const Header = () => {
+const Header = ({ activeSection }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   // Function to handle dropdown toggle
@@ -89,7 +89,7 @@ const Header = () => {
 
                 {/* Dropdown Menu */}
                 {dropdownOpen && (
-                  <div className="absolute top-full left-0 mt-2 w-40 border bg-white shadow-lg rounded-md z-50">
+                  <div className="absolute top-full left-0 mt-2 w-40 border bg-orange-50 shadow-lg rounded-md z-50">
                     {links.dropdown.map((subLink, subIndex) => (
                       <NavLink
                         key={subIndex}
