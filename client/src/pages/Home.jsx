@@ -59,7 +59,7 @@ export const Home = () => {
 
         {/* Main Content */}
         <div className="w-3/4">
-          <div className="relative z-10 flex flex-col xl:flex-row justify-center gap-20 items-center h-full p-20 text-orange-50">
+          <div className="relative z-10 flex flex-col xl:flex-row justify-center gap-20 items-center h-full p-20 text-white">
             <div className="w-full flex flex-col justify-center">
               {/* Headings */}
               <h1 className="font-heading text-9xl font-bold mb-6">Hungry!</h1>
@@ -75,7 +75,7 @@ export const Home = () => {
                 <NavLink
                   key={index}
                   to={link.path}
-                  className="font-heading py-1 px-2 w-fit rounded-md bg-[#333333ce] hover:bg-[#333] hover:scale-110 transition-all duration-300 text-xl text-orange-50 hover:text-orange-400"
+                  className="font-heading py-1 px-2 w-fit rounded-md bg-[#333333ce] hover:bg-[#333] hover:scale-110 transition-all duration-300 text-xl text-white hover:text-orange-400"
                   onClick={(e) => {
                     if (link.path.startsWith("#")) {
                       e.preventDefault();
