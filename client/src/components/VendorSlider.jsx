@@ -10,7 +10,7 @@ import { FaOpencart } from "react-icons/fa";
 
 import imge from "../images/hero.jpeg";
 
-export const Slider = () => {
+export const VendorSlider = () => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
@@ -33,25 +33,25 @@ export const Slider = () => {
         }}
         rewind={true}
         modules={[Pagination, Navigation]}
-        className="mySwiper pb-16"
+        className="mySwiper w-3/4"
         breakpoints={{
           640: {
-            slidesPerView: 2,
+            slidesPerView: 1,
           },
           768: {
-            slidesPerView: 3,
+            slidesPerView: 2,
           },
           1024: {
-            slidesPerView: 4,
+            slidesPerView: 3,
           },
           1280: {
-            slidesPerView: 5,
+            slidesPerView: 4,
           },
         }}
       >
         {itemSlider.map((item, index) => (
           <SwiperSlide
-            className="border-2 border-[#e2e8f0] p-2 shadow-md rounded-md font-body"
+            className="border-2 border-[#e2e8f0] p-2 shadow-md rounded-md font-body bg-green-50"
             key={index}
           >
             <img src={item.itemImage} alt={item.itemName} className="" />
@@ -91,7 +91,7 @@ export const Slider = () => {
       </Swiper>
 
       {/* Custom Navigation and Pagination Controls */}
-      <div className="flex justify-center items-center mt-4 absolute bottom-2 left-0 right-0 z-50 px-16 pb-16 space-x-4">
+      <div className="w-3/4 flex justify-center items-center mt-4 bottom-2 z-50 space-x-4">
         <button
           ref={prevRef}
           className="bg-[#113592] p-2 rounded-full hover:bg-[#002379]"
