@@ -4,9 +4,15 @@ import { GrGroup } from "react-icons/gr";
 import { TbListSearch } from "react-icons/tb";
 // import { MdOutlineQuestionMark, MdOutlineDoubleArrow } from "react-icons/md";
 import { IoInfiniteSharp, IoBonfire } from "react-icons/io5";
+
 import image_1 from "../images/step_1.png";
 import image_2 from "../images/step_2.png";
 import image_3 from "../images/step_3.png";
+import image_11 from "../images/step_11.png";
+import image_22 from "../images/step_22.png";
+import image_33 from "../images/step_33.png";
+import image_44 from "../images/step_44.webp";
+
 import { VendorSlider } from "../components/VendorSlider";
 import FoodGallery from "../components/FoodGallery";
 
@@ -16,7 +22,7 @@ const heroLinks = [
   { name: "How It Works", path: "#how" },
   { name: "Meet the Vendors", path: "#vendors" },
   { name: "Delicious Dishes", path: "#foods" },
-  { name: "Join as a Seller", path: "/register" },
+  { name: "Become a Seller", path: "#seller" },
 ];
 
 const features = [
@@ -58,48 +64,44 @@ export const Home = () => {
         <div className="absolute inset-0 bg-[#333] opacity-50"></div>
 
         {/* Main Content */}
-        <div className="w-3/4">
-          <div className="relative z-10 flex flex-col xl:flex-row justify-center gap-20 items-center h-full p-20 text-white">
-            <div className="w-full flex flex-col justify-center">
-              {/* Headings */}
-              <h1 className="font-heading text-9xl font-bold mb-6">Hungry!</h1>
-              <h5 className="font-heading text-3xl font-bold mt-4 ml-2">
-                What are you waiting for!
-                <br />
-                Eat delicious home-cooked meals every day.
-              </h5>
-            </div>
-            {/* Hero Links */}
-            <div className="w-full grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-1 justify-start items-center">
-              {heroLinks.map((link, index) => (
-                <NavLink
-                  key={index}
-                  to={link.path}
-                  className="font-heading py-1 px-2 w-fit rounded-md bg-[#333333ce] hover:bg-[#333] hover:scale-110 transition-all duration-300 text-xl text-white hover:text-orange-400"
-                  onClick={(e) => {
-                    if (link.path.startsWith("#")) {
-                      e.preventDefault();
-                      const target = document.getElementById(
-                        link.path.slice(1)
-                      );
-                      const navbarHeight =
-                        document.querySelector("nav")?.offsetHeight || 0;
+        <div className="w-SW relative z-10 flex flex-col xl:flex-row justify-center gap-20 items-center h-full p-8 text-white">
+          <div className="w-full flex flex-col justify-center">
+            {/* Headings */}
+            <h1 className="font-heading text-9xl font-bold mb-6">Hungry!</h1>
+            <h5 className="font-heading text-3xl font-bold mt-4 ml-2">
+              What are you waiting for!
+              <br />
+              Eat delicious meals everyday.
+            </h5>
+          </div>
+          {/* Hero Links */}
+          <div className="w-full flex flex-wrap  gap-4 justify-start items-start">
+            {heroLinks.map((link, index) => (
+              <NavLink
+                key={index}
+                to={link.path}
+                className="font-heading py-1 px-2 w-fit rounded-md bg-[#333333ce] hover:bg-[#333] hover:scale-110 transition-all duration-300 text-xl text-white hover:text-orange-400"
+                onClick={(e) => {
+                  if (link.path.startsWith("#")) {
+                    e.preventDefault();
+                    const target = document.getElementById(link.path.slice(1));
+                    const navbarHeight =
+                      document.querySelector("nav")?.offsetHeight || 0;
 
-                      if (target) {
-                        const targetPosition =
-                          target.offsetTop - navbarHeight + 1;
-                        window.scrollTo({
-                          top: targetPosition,
-                          behavior: "smooth",
-                        });
-                      }
+                    if (target) {
+                      const targetPosition =
+                        target.offsetTop - navbarHeight + 1;
+                      window.scrollTo({
+                        top: targetPosition,
+                        behavior: "smooth",
+                      });
                     }
-                  }}
-                >
-                  {link.name}
-                </NavLink>
-              ))}
-            </div>
+                  }
+                }}
+              >
+                {link.name}
+              </NavLink>
+            ))}
           </div>
         </div>
       </section>
@@ -109,7 +111,7 @@ export const Home = () => {
         id="about"
         className="relative flex flex-col gap-8 justify-center items-center p-16 bg-white shadow-sm"
       >
-        <div className="w-3/4 text-start">
+        <div className="w-SW text-start">
           {/* Section Heading */}
           <h1 className="text-4xl uppercase font-heading font-bold italic mb-2 text-orange-400">
             Discover TiffinCraft
@@ -130,7 +132,7 @@ export const Home = () => {
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-3/4 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-SW relative z-10">
           {features.map((feature, index) => (
             <div
               key={index}
@@ -154,7 +156,7 @@ export const Home = () => {
         className="p-16 flex flex-col gap-16 justify-center items-center bg-orange-50"
       >
         {/* Section Heading */}
-        <div className="w-3/4 text-start ml-2">
+        <div className="w-SW text-start ml-2">
           <h1 className="text-4xl uppercase font-heading font-bold italic mb-2 text-orange-400">
             How TiffinCraft Works
           </h1>
@@ -164,7 +166,7 @@ export const Home = () => {
         </div>
 
         {/* Steps */}
-        <div className="grid grid-cols-1 gap-12 w-3/4">
+        <div className="w-SW grid grid-cols-1 gap-12">
           {/* Step 1 */}
           <div className="grid lg:grid-cols-2 gap-24 items-center">
             <div className="flex flex-col justify-center">
@@ -174,9 +176,13 @@ export const Home = () => {
               <h1 className="font-heading font-bold text-4xl my-4 ml-2 text-orange-300">
                 Find Your Vendor
               </h1>
-              <p className="font-body text-lg text-gray-700 ml-2">
+              <p className="font-body italic text-lg text-gray-700 ml-2">
                 Browse through our trusted vendors and pick the one that matches
-                your requirements. It's easy to sign up and create your account.
+                your requirements. It's easy to{" "}
+                <NavLink to={"/regrister"} className="text-blue-400 font-bold">
+                  sign up
+                </NavLink>{" "}
+                and create your account.
               </p>
             </div>
             <div className="flex justify-center relative">
@@ -214,7 +220,7 @@ export const Home = () => {
               <h1 className="font-heading font-bold text-4xl my-4 ml-2 text-blue-400">
                 Customize Your Plan
               </h1>
-              <p className="font-body text-lg text-gray-700 ml-2">
+              <p className="font-body italic text-lg text-gray-700 ml-2">
                 Communicate with the vendor to design your ideal meal plan. You
                 can tailor it to your preferences and needs.
               </p>
@@ -230,7 +236,7 @@ export const Home = () => {
               <h1 className="font-heading font-bold text-4xl my-4 ml-2 text-green-400">
                 Enjoy Hassle-Free Meals
               </h1>
-              <p className="font-body text-lg text-gray-700 ml-2">
+              <p className="font-body italic text-lg text-gray-700 ml-2">
                 Sit back and enjoy your meal deliveries—freshly prepared and
                 delivered right to your doorstep.
               </p>
@@ -254,13 +260,128 @@ export const Home = () => {
         </div>
       </section>
 
+      {/* Become a Seller Section */}
+      <section
+        id="how"
+        className="p-16 flex flex-col gap-16 justify-center items-center bg-white"
+      >
+        {/* Section Heading */}
+        <div className="w-SW text-start ml-2">
+          <h1 className="text-4xl uppercase font-heading font-bold italic mb-2 text-orange-400">
+            Partner with TiffinCraft
+          </h1>
+          <p className="text-lg font-body font-bold italic">
+            Share your culinary talent, reach more customers, and grow your
+            business effortlessly. Signing up is quick and easy!
+          </p>
+        </div>
+
+        {/* Steps */}
+        <div className="w-SW grid grid-cols-1 gap-12">
+          {/* Step 1 */}
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+            <div className="flex justify-center relative">
+              <img
+                src={image_11}
+                alt="Step 1: A person holding a phone"
+                className="relative z-10 h-[500px] w-auto"
+              />
+            </div>
+            <div className="flex flex-col justify-center">
+              <span className="font-heading font-extrabold text-9xl text-orange-200 hover:text-orange-300 transition-all duration-500">
+                01
+              </span>
+              <h1 className="font-heading font-bold text-4xl my-4 ml-2 text-orange-300">
+                Regrister as a Seller
+              </h1>
+              <p className="font-body italic text-lg text-gray-700 ml-2">
+                Step into a world of endless opportunities. Become part of our
+                thriving community of home chefs and turn your passion for
+                cooking into a rewarding journey.
+              </p>
+            </div>
+          </div>
+
+          {/* Step 2 */}
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+            <div className="flex flex-col justify-center">
+              <span className="font-heading font-extrabold text-9xl text-[#97a48598] hover:text-[#97A485] transition-all duration-500">
+                02
+              </span>
+              <h1 className="font-heading font-bold text-4xl my-4 ml-2 text-[#97A485]">
+                List Your Dishes
+              </h1>
+              <p className="font-body italic text-lg text-gray-700 ml-2">
+                Share your culinary masterpieces with the world. Create a
+                personalized menu, set your prices, and make your mark with your
+                signature dishes.
+              </p>
+            </div>
+            <div className="flex justify-center relative order-last lg:order-none">
+              <img
+                src={image_22}
+                alt="Step 2: A person talking on the phone with the vendors"
+                className="relative z-10 h-[500px] w-auto"
+              />
+            </div>
+          </div>
+
+          {/* Step 3 */}
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+            <div className="flex justify-center relative">
+              <img
+                src={image_33}
+                alt="Step 3: A person delivering food to the customer"
+                className="relative z-10 h-[500px] w-auto"
+              />
+            </div>
+            <div className="flex flex-col justify-center">
+              <span className="font-heading font-extrabold text-9xl text-[#ffa07aa1] hover:text-[#FFA07A] transition-all duration-500">
+                03
+              </span>
+              <h1 className="font-heading font-bold text-4xl my-4 ml-2 text-[#FFA07A]">
+                Connect with Customers
+              </h1>
+              <p className="font-body italic text-lg text-gray-700 ml-2">
+                Build lasting connections with food lovers who appreciate the
+                magic of home-cooked meals. Inspire their taste buds with every
+                bite.
+              </p>
+            </div>
+          </div>
+
+          {/* Step 4 */}
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+            <div className="flex flex-col justify-center">
+              <span className="font-heading font-extrabold text-9xl text-blue-200 hover:text-blue-400 transition-all duration-500">
+                04
+              </span>
+              <h1 className="font-heading font-bold text-4xl my-4 ml-2 text-blue-400">
+                Get Paid
+              </h1>
+              <p className="font-body italic text-lg text-gray-700 ml-2">
+                Enjoy a seamless payment experience while you focus on
+                delighting your customers with exceptional meals.
+              </p>
+            </div>
+            <div className="flex justify-center relative">
+              <img
+                src={image_44}
+                alt="Step 3: A person delivering food to the customer"
+                className="relative z-10 h-[500px] w-auto"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Meet Our Vendors  */}
       <section
         id="vendors"
-        className="p-16 bg-white flex flex-col items-center relative"
+        className="p-16 bg-orange-50 flex flex-col items-center relative"
       >
         {/* Section Heading */}
-        <div className="w-3/4 text-start mb-8">
+        <div className="w-SW text-start mb-8">
           <h1 className="text-4xl uppercase font-heading font-bold italic mb-2 text-orange-400">
             Meet Our Vendors
           </h1>
@@ -275,9 +396,9 @@ export const Home = () => {
       {/* Discover Delicious Creations  */}
       <section
         id="foods"
-        className="p-16 flex flex-col items-center bg-orange-50 relative"
+        className="p-16 flex flex-col items-center bg-white relative"
       >
-        <div className="w-3/4 text-start mb-8">
+        <div className="w-SW text-start mb-8">
           <h1 className="text-4xl uppercase font-heading font-bold italic mb-2 text-orange-400">
             Discover Delicious Creations
           </h1>

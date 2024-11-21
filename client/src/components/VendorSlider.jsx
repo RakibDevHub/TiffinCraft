@@ -18,10 +18,11 @@ export const VendorSlider = () => {
     <>
       <Swiper
         slidesPerView={1}
+        slidesPerGroup={1}
         spaceBetween={20}
         pagination={{
           clickable: true,
-          el: ".custom-pagination", // Use custom pagination class
+          el: ".custom-pagination",
         }}
         navigation={{
           prevEl: prevRef.current,
@@ -33,25 +34,29 @@ export const VendorSlider = () => {
         }}
         rewind={true}
         modules={[Pagination, Navigation]}
-        className="mySwiper w-3/4"
+        className="mySwiper w-SW p-4"
         breakpoints={{
           640: {
             slidesPerView: 1,
+            slidesPerGroup: 1,
           },
           768: {
             slidesPerView: 2,
+            slidesPerGroup: 2,
           },
           1024: {
             slidesPerView: 3,
+            slidesPerGroup: 3,
           },
           1280: {
             slidesPerView: 4,
+            slidesPerGroup: 4,
           },
         }}
       >
         {itemSlider.map((item, index) => (
           <SwiperSlide
-            className="border-2 border-[#e2e8f0] p-2 shadow-md rounded-md font-body bg-green-50"
+            className="border-2 border-[#e2e8f0] p-2 shadow-md rounded-md font-body bg-green-50 hover:scale-105"
             key={index}
           >
             <img src={item.itemImage} alt={item.itemName} className="" />
@@ -91,7 +96,7 @@ export const VendorSlider = () => {
       </Swiper>
 
       {/* Custom Navigation and Pagination Controls */}
-      <div className="w-3/4 flex justify-center items-center mt-4 bottom-2 z-50 space-x-4">
+      <div className="w-SW flex justify-center items-center mt-4 bottom-2 z-50 space-x-4">
         <button
           ref={prevRef}
           className="bg-[#113592] p-2 rounded-full hover:bg-[#002379]"

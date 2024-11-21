@@ -5,6 +5,10 @@ module.exports = {
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
     extend: {
+      width: {
+        SW: "80%",
+      },
+
       // Custom Fonts
       fontFamily: {
         heading: ["Poppins", "sans-serif"],
