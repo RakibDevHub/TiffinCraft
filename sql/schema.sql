@@ -1,26 +1,21 @@
 -- =============================================
--- TIFFINCRAFT DATABASE SCHEMA
--- Complete SQL file with all sequences, tables, and triggers
--- =============================================
-
--- =============================================
--- 1. SEQUENCES
+-- 1. Sequences
 -- =============================================
 CREATE SEQUENCE user_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE kitchen_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE category_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE tag_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE menu_item_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE area_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE order_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE plan_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE subscription_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE payment_transactions_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE payout_seq START WITH 1 INCREMENT BY 1;
 
 -- =============================================
--- 2. CORE TABLES
+-- 2. Core Users & Roles
 -- =============================================
-
--- 2.1 USERS TABLE
 CREATE TABLE users (
     user_id           NUMBER DEFAULT user_seq.NEXTVAL PRIMARY KEY,
     name              VARCHAR2(100) NOT NULL,
@@ -38,7 +33,9 @@ CREATE TABLE users (
     updated_at        TIMESTAMP DEFAULT SYSTIMESTAMP
 );
 
--- 2.2 KITCHENS TABLE
+-- =============================================
+-- 3. Kitchens & Service Zones
+-- =============================================
 CREATE TABLE kitchens (
     kitchen_id        NUMBER DEFAULT kitchen_seq.NEXTVAL PRIMARY KEY,
     owner_id          NUMBER NOT NULL
@@ -51,15 +48,12 @@ CREATE TABLE kitchens (
     years_experience  NUMBER(2),
     signature_dish    VARCHAR2(100),
     avg_prep_time     NUMBER(3) DEFAULT 30,
-    is_halal          NUMBER(1) DEFAULT 1,
-    cleanliness_pledge NUMBER(1) DEFAULT 0,
     approval_status   VARCHAR2(20) DEFAULT 'pending'
         CONSTRAINT chk_approval_status CHECK (LOWER(approval_status) IN ('pending','approved','rejected')),
     created_at        TIMESTAMP DEFAULT SYSTIMESTAMP,
     updated_at        TIMESTAMP DEFAULT SYSTIMESTAMP
 );
 
--- 2.3 SERVICE_AREAS TABLE
 CREATE TABLE service_areas (
     area_id           NUMBER DEFAULT area_seq.NEXTVAL PRIMARY KEY,
     name              VARCHAR2(100) NOT NULL,
@@ -68,7 +62,6 @@ CREATE TABLE service_areas (
     CONSTRAINT uq_service_area UNIQUE (name, city)
 );
 
--- 2.4 KITCHEN_SERVICE_ZONES TABLE
 CREATE TABLE kitchen_service_zones (
     kitchen_id        NUMBER NOT NULL
         CONSTRAINT fk_ksz_kitchen REFERENCES kitchens(kitchen_id) ON DELETE CASCADE,
@@ -80,10 +73,8 @@ CREATE TABLE kitchen_service_zones (
 );
 
 -- =============================================
--- 3. CATEGORIES & MENU TABLES
+-- 4. Categories & Menu
 -- =============================================
-
--- 3.1 CATEGORIES TABLE
 CREATE TABLE categories (
     category_id       NUMBER DEFAULT category_seq.NEXTVAL PRIMARY KEY,
     name              VARCHAR2(50) NOT NULL,
@@ -91,7 +82,6 @@ CREATE TABLE categories (
     image             VARCHAR(255)
 );
 
--- 3.2 MENU_ITEMS TABLE
 CREATE TABLE menu_items (
     item_id           NUMBER DEFAULT menu_item_seq.NEXTVAL PRIMARY KEY,
     kitchen_id        NUMBER NOT NULL
@@ -109,7 +99,6 @@ CREATE TABLE menu_items (
     updated_at        TIMESTAMP DEFAULT SYSTIMESTAMP
 );
 
--- 3.3 MENU_ITEM_CATEGORIES TABLE (Junction table)
 CREATE TABLE menu_item_categories (
     item_id           NUMBER NOT NULL
         CONSTRAINT fk_mic_item REFERENCES menu_items(item_id) ON DELETE CASCADE,
@@ -119,10 +108,8 @@ CREATE TABLE menu_item_categories (
 );
 
 -- =============================================
--- 4. ORDERS TABLES
+-- 5. Orders
 -- =============================================
-
--- 4.1 ORDERS TABLE
 CREATE TABLE orders (
     order_id          NUMBER DEFAULT order_seq.NEXTVAL PRIMARY KEY,
     buyer_id          NUMBER NOT NULL
@@ -143,10 +130,9 @@ CREATE TABLE orders (
     updated_at        TIMESTAMP DEFAULT SYSTIMESTAMP,
     buyer_delete      NUMBER(1) DEFAULT 0,
     cancellation_reason VARCHAR2(255),
-    cancel_by VARCHAR2(10)
+    cancel_by VARCHAR2(10) 
 );
 
--- 4.2 ORDER_ITEMS TABLE
 CREATE TABLE order_items (
     order_item_id     NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     order_id          NUMBER NOT NULL
@@ -159,10 +145,8 @@ CREATE TABLE order_items (
 );
 
 -- =============================================
--- 5. SUBSCRIPTIONS TABLES
+-- 6. Subscriptions
 -- =============================================
-
--- 5.1 SUBSCRIPTION_PLANS TABLE
 CREATE TABLE subscription_plans (
     plan_id           NUMBER DEFAULT plan_seq.NEXTVAL PRIMARY KEY,
     plan_name         VARCHAR2(50) NOT NULL,
@@ -176,7 +160,6 @@ CREATE TABLE subscription_plans (
     updated_at        TIMESTAMP DEFAULT SYSTIMESTAMP
 );
 
--- 5.2 SELLER_SUBSCRIPTIONS TABLE
 CREATE TABLE seller_subscriptions (
     subscription_id   NUMBER DEFAULT subscription_seq.NEXTVAL PRIMARY KEY,
     seller_id         NUMBER NOT NULL
@@ -192,22 +175,20 @@ CREATE TABLE seller_subscriptions (
 );
 
 -- =============================================
--- 6. PAYMENTS & PAYOUTS TABLES
+-- 7. Payments & Payouts & Refunds
 -- =============================================
-
--- 6.1 PAYMENT_TRANSACTIONS TABLE
 CREATE TABLE payment_transactions ( 
     id                NUMBER DEFAULT payment_transactions_seq.NEXTVAL PRIMARY KEY,
     transaction_id    VARCHAR2(50) UNIQUE NOT NULL,
     user_id           NUMBER NOT NULL
         CONSTRAINT pt_fk_user REFERENCES users(user_id),
-    amount            NUMBER(10,2) NOT NULL,
+    amount            NUMBER(10,2) NOT NULL, -- total ammount user paying for order or subscription
     currency          VARCHAR2(3) DEFAULT 'BDT',
     transaction_type  VARCHAR2(20) NOT NULL
         CONSTRAINT pt_chk_type CHECK (transaction_type IN ('PAYMENT','PAYOUT')),
     reference_type    VARCHAR2(20) NOT NULL
         CONSTRAINT pt_chk_ref_type CHECK (reference_type IN ('ORDER','SUBSCRIPTION','WITHDRAWAL','REFUND')),
-    reference_id      NUMBER,
+    reference_id      NUMBER, -- SUBSCRIPTION ID / ORDER ID / WITHDRAWAL ID / REFUND ID
     payment_method    VARCHAR2(50), 
     status            VARCHAR2(20) NOT NULL
         CONSTRAINT pt_chk_status CHECK (status IN ('PENDING','SUCCESS','FAILED','CANCELLED')),
@@ -219,14 +200,13 @@ CREATE TABLE payment_transactions (
     updated_at        TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL
 );
 
--- 6.2 REFUND_REQUESTS TABLE
 CREATE TABLE refund_requests (
     refund_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     order_id NUMBER NOT NULL,
     buyer_id NUMBER NOT NULL,
     amount NUMBER(10,2) NOT NULL,
-    method VARCHAR2(50) NOT NULL,
-    account_details VARCHAR2(255) NOT NULL,
+    method VARCHAR2(50) NOT NULL, -- e.g., 'Bank Transfer', 'bKash', 'Nagad'
+    account_details VARCHAR2(255) NOT NULL, -- target account info
     reason VARCHAR2(500),
     status VARCHAR2(20) DEFAULT 'PENDING' CHECK (status IN ('PENDING', 'APPROVED', 'REJECTED', 'PROCESSED')),
     created_at TIMESTAMP DEFAULT SYSTIMESTAMP,
@@ -237,13 +217,12 @@ CREATE TABLE refund_requests (
     CONSTRAINT fk_refund_buyer FOREIGN KEY (buyer_id) REFERENCES users(user_id)
 );
 
--- 6.3 WITHDRAW_REQUESTS TABLE
 CREATE TABLE withdraw_requests (
     withdraw_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     seller_id NUMBER NOT NULL,
     amount NUMBER(10,2) NOT NULL,
-    method VARCHAR2(50) NOT NULL,
-    account_details VARCHAR2(255) NOT NULL,
+    method VARCHAR2(50) NOT NULL, -- e.g., 'Bank Transfer', 'bKash', 'Nagad'
+    account_details VARCHAR2(255) NOT NULL, -- target account info
     status VARCHAR2(20) DEFAULT 'PENDING' 
         CHECK (status IN ('PENDING', 'APPROVED', 'REJECTED', 'PROCESSED')),
     created_at TIMESTAMP DEFAULT SYSTIMESTAMP,
@@ -253,10 +232,8 @@ CREATE TABLE withdraw_requests (
 );
 
 -- =============================================
--- 7. BUYER ENGAGEMENT TABLES
+-- 8. Buyer Engagement (Cart, Favorites, Reviews)
 -- =============================================
-
--- 7.1 CART TABLE
 CREATE TABLE cart (
     cart_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     user_id NUMBER NOT NULL
@@ -268,23 +245,22 @@ CREATE TABLE cart (
     CONSTRAINT uk_cart_user_item UNIQUE (user_id, item_id)
 );
 
--- 7.2 FAVORITES TABLE
 CREATE TABLE favorites (
     favorite_id   NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     user_id       NUMBER NOT NULL
         CONSTRAINT fk_fav_user REFERENCES users(user_id) ON DELETE CASCADE,
     reference_type VARCHAR2(20) NOT NULL
         CONSTRAINT chk_fav_type CHECK (reference_type IN ('KITCHEN','ITEM')),
-    reference_id   NUMBER NOT NULL,
+    reference_id   NUMBER NOT NULL, -- kitchen id or menu item id
     added_at       TIMESTAMP DEFAULT SYSTIMESTAMP,
     CONSTRAINT uq_fav UNIQUE (user_id, reference_type, reference_id)
 );
 
--- 7.3 REVIEWS TABLE
+-- Enhanced reviews table
 CREATE TABLE reviews (
     review_id           NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     reviewer_id         NUMBER, 
-    reference_id        NUMBER,
+    reference_id        NUMBER, -- kitchen id or menu item id or null for platform review tiffincraft
     reference_type      VARCHAR2(20) NOT NULL
         CONSTRAINT chk_rev_type CHECK (reference_type IN ('KITCHEN','ITEM','TIFFINCRAFT')),
     rating              NUMBER(1) CHECK (rating BETWEEN 1 AND 5),
@@ -300,10 +276,8 @@ CREATE TABLE reviews (
 );
 
 -- =============================================
--- 8. ADMIN TABLES
+-- 9. Suspension
 -- =============================================
-
--- 8.1 SUSPENSIONS TABLE
 CREATE TABLE suspensions (
     suspension_id       NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
     reference_id        NUMBER NOT NULL,
@@ -312,29 +286,23 @@ CREATE TABLE suspensions (
     reason              VARCHAR2(255) NOT NULL,
     suspended_at        TIMESTAMP DEFAULT SYSTIMESTAMP,
     suspended_until     TIMESTAMP NULL,
-    created_by          NUMBER,
-    status              VARCHAR2(20) DEFAULT 'active'
+    created_by          NUMBER, -- admin id who suspended
+    status              VARCHAR2(20) DEFAULT 'active' -- active / lifted
 );
 
+
 -- =============================================
--- 9. INDEXES
+-- 10. Indexes
 -- =============================================
 CREATE INDEX idx_kitchen_owner ON kitchens(owner_id);
 CREATE INDEX idx_orders_buyer ON orders(buyer_id);
-CREATE INDEX idx_reviews_kitchen ON reviews(reference_id, reference_type);
-CREATE INDEX idx_favorites_user ON favorites(user_id);
+CREATE INDEX idx_reviews_kitchen ON reviews(kitchen_id);
+CREATE INDEX idx_favorites_user ON favorites(user_id);F
 CREATE INDEX idx_payment_reference ON payment_transactions(reference_type, reference_id);
-CREATE INDEX idx_menu_kitchen ON menu_items(kitchen_id);
-CREATE INDEX idx_orders_status ON orders(status);
-CREATE INDEX idx_orders_kitchen ON orders(kitchen_id);
-CREATE INDEX idx_subscription_seller ON seller_subscriptions(seller_id);
-CREATE INDEX idx_subscription_dates ON seller_subscriptions(start_date, end_date);
 
 -- =============================================
--- 10. TRIGGERS
+-- 11. Triggers
 -- =============================================
-
--- 10.1 UPDATE TIMESTAMP TRIGGER FOR PAYMENT_TRANSACTIONS
 CREATE OR REPLACE TRIGGER pt_update_trigger
 BEFORE UPDATE ON payment_transactions
 FOR EACH ROW
@@ -343,87 +311,4 @@ BEGIN
 END;
 /
 
--- 10.2 UPDATE TIMESTAMP TRIGGER FOR USERS
-CREATE OR REPLACE TRIGGER users_update_trigger
-BEFORE UPDATE ON users
-FOR EACH ROW
-BEGIN
-    :NEW.updated_at := SYSTIMESTAMP;
-END;
-/
-
--- 10.3 UPDATE TIMESTAMP TRIGGER FOR KITCHENS
-CREATE OR REPLACE TRIGGER kitchens_update_trigger
-BEFORE UPDATE ON kitchens
-FOR EACH ROW
-BEGIN
-    :NEW.updated_at := SYSTIMESTAMP;
-END;
-/
-
--- 10.4 UPDATE TIMESTAMP TRIGGER FOR MENU_ITEMS
-CREATE OR REPLACE TRIGGER menu_items_update_trigger
-BEFORE UPDATE ON menu_items
-FOR EACH ROW
-BEGIN
-    :NEW.updated_at := SYSTIMESTAMP;
-END;
-/
-
--- 10.5 UPDATE TIMESTAMP TRIGGER FOR ORDERS
-CREATE OR REPLACE TRIGGER orders_update_trigger
-BEFORE UPDATE ON orders
-FOR EACH ROW
-BEGIN
-    :NEW.updated_at := SYSTIMESTAMP;
-END;
-/
-
--- 10.6 UPDATE TIMESTAMP TRIGGER FOR REVIEWS
-CREATE OR REPLACE TRIGGER reviews_update_trigger
-BEFORE UPDATE ON reviews
-FOR EACH ROW
-BEGIN
-    :NEW.updated_at := SYSTIMESTAMP;
-END;
-/
-
--- 10.7 UPDATE TIMESTAMP TRIGGER FOR SUBSCRIPTION_PLANS
-CREATE OR REPLACE TRIGGER subscription_plans_update_trigger
-BEFORE UPDATE ON subscription_plans
-FOR EACH ROW
-BEGIN
-    :NEW.updated_at := SYSTIMESTAMP;
-END;
-/
-
--- 10.8 UPDATE TIMESTAMP TRIGGER FOR SELLER_SUBSCRIPTIONS
-CREATE OR REPLACE TRIGGER seller_subscriptions_update_trigger
-BEFORE UPDATE ON seller_subscriptions
-FOR EACH ROW
-BEGIN
-    :NEW.updated_at := SYSTIMESTAMP;
-END;
-/
-
--- 10.9 UPDATE TIMESTAMP TRIGGER FOR REFUND_REQUESTS
-CREATE OR REPLACE TRIGGER refund_requests_update_trigger
-BEFORE UPDATE ON refund_requests
-FOR EACH ROW
-BEGIN
-    :NEW.updated_at := SYSTIMESTAMP;
-END;
-/
-
--- 10.10 UPDATE TIMESTAMP TRIGGER FOR WITHDRAW_REQUESTS
-CREATE OR REPLACE TRIGGER withdraw_requests_update_trigger
-BEFORE UPDATE ON withdraw_requests
-FOR EACH ROW
-BEGIN
-    :NEW.updated_at := SYSTIMESTAMP;
-END;
-/
-
--- =============================================
--- END OF SCHEMA
--- =============================================
+DROP SEQUENCE tag_seq;
