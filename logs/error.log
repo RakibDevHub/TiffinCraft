@@ -1,0 +1,115 @@
+[2025-09-08 07:32:13] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-08 07:32:44] Error 404: Method dishes not found in controller PageController.
+[2025-09-08 10:29:16] Error 404: Route 'resend-email' does not exist.
+[2025-09-08 11:49:55] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-08 11:54:36] Error 404: Route 'resend-email' does not exist.
+[2025-09-08 12:05:31] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-08 12:06:21] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-08 14:22:49] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-08 14:48:25] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-08 18:59:30] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-08 20:29:21] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-08 20:29:38] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-08 20:29:44] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-08 20:33:49] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-08 20:47:14] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-08 20:48:06] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-08 20:48:53] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-08 20:55:00] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-08 20:56:23] Error 404: Route 'reset-password' does not exist.
+[2025-09-08 21:12:16] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-08 21:13:29] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-08 21:33:50] Error 500: Controller file missing: SellerController.php
+[2025-09-08 21:37:34] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-09 07:27:31] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-09 08:16:27] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-09 08:16:39] Error 500: Controller file missing: SellerController.php
+[2025-09-09 09:09:27] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-09 09:10:50] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-09 09:13:39] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-09 09:14:12] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-09 09:14:34] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-09 09:15:06] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-09 09:18:13] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-09 09:23:24] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-09 09:23:54] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-09 09:24:10] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-09 09:37:51] Error 404: Route 'favicon.ico' does not exist.
+[2025-09-09 09:44:25] Error 404: Route 'favicon.ico' does not exist.
+[2025-11-21 16:14:05] Error ERROR: Database connection failed: ORA-01109: database not open
+[2025-11-21 16:14:05] Error ERROR: Controller execution failed: Database connection failed.
+[2025-11-21 16:14:16] Error ERROR: Database connection failed: ORA-01109: database not open
+[2025-11-21 16:14:16] Error ERROR: Controller execution failed: Database connection failed.
+[2025-12-08 15:45:58] Error ERROR: Database connection failed: ORA-12514: TNS:listener does not currently know of service requested in connect descriptor
+[2025-12-08 15:45:58] Error ERROR: Controller execution failed: Database connection failed.
+[2025-12-08 15:46:13] Error ERROR: Database connection failed: ORA-01109: database not open
+[2025-12-08 15:46:13] Error ERROR: Controller execution failed: Database connection failed.
+[2025-12-08 15:47:33] Error ERROR: Database connection failed: ORA-01109: database not open
+[2025-12-08 15:47:33] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-13 21:10:10] Error ERROR: Database connection failed: ORA-12514: TNS:listener does not currently know of service requested in connect descriptor
+[2026-01-13 21:10:10] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-13 21:10:15] Error ERROR: Database connection failed: ORA-12514: TNS:listener does not currently know of service requested in connect descriptor
+[2026-01-13 21:10:15] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-13 21:10:17] Error ERROR: Database connection failed: ORA-12514: TNS:listener does not currently know of service requested in connect descriptor
+[2026-01-13 21:10:17] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-13 21:10:19] Error ERROR: Database connection failed: ORA-12514: TNS:listener does not currently know of service requested in connect descriptor
+[2026-01-13 21:10:19] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-13 21:10:21] Error ERROR: Database connection failed: ORA-12514: TNS:listener does not currently know of service requested in connect descriptor
+[2026-01-13 21:10:21] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-13 21:10:38] Error ERROR: Database connection failed: ORA-12514: TNS:listener does not currently know of service requested in connect descriptor
+[2026-01-13 21:10:38] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-13 21:10:42] Error ERROR: Database connection failed: ORA-12514: TNS:listener does not currently know of service requested in connect descriptor
+[2026-01-13 21:10:42] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-19 12:36:23] Error ERROR: Database connection failed: ORA-01109: database not open
+[2026-01-19 12:36:23] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-19 12:36:28] Error ERROR: Database connection failed: ORA-01109: database not open
+[2026-01-19 12:36:28] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-19 12:36:39] Error ERROR: Database connection failed: ORA-01109: database not open
+[2026-01-19 12:36:39] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-19 12:36:40] Error ERROR: Database connection failed: ORA-01109: database not open
+[2026-01-19 12:36:40] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-19 12:36:42] Error ERROR: Database connection failed: ORA-01109: database not open
+[2026-01-19 12:36:42] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-19 12:36:46] Error ERROR: Database connection failed: ORA-01109: database not open
+[2026-01-19 12:36:46] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-19 12:36:55] Error ERROR: Database connection failed: ORA-01109: database not open
+[2026-01-19 12:36:55] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-19 12:36:56] Error ERROR: Database connection failed: ORA-01109: database not open
+[2026-01-19 12:36:56] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-19 12:37:10] Error ERROR: Database connection failed: ORA-01109: database not open
+[2026-01-19 12:37:10] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-19 12:37:15] Error ERROR: Database connection failed: ORA-01109: database not open
+[2026-01-19 12:37:15] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-19 21:14:49] Error ERROR: Database connection failed: ORA-01109: database not open
+[2026-01-19 21:14:49] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-19 21:15:03] Error ERROR: Database connection failed: ORA-01109: database not open
+[2026-01-19 21:15:03] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-19 21:15:04] Error ERROR: Database connection failed: ORA-01109: database not open
+[2026-01-19 21:15:04] Error ERROR: Controller execution failed: Database connection failed.
+[2026-01-24 22:11:41] Error ERROR: Controller execution failed: Database error: ORA-00942: table or view does not exist
+[2026-02-07 22:57:12] Error ERROR: Controller execution failed: Failed to parse time string (05-FEB-26 05.14.27.669000 PM) at position 26 (P): The timezone could not be found in the database
+[2026-02-07 22:59:32] Error ERROR: Controller execution failed: Failed to parse time string (05-FEB-26 05.14.27.669000 PM) at position 26 (P): The timezone could not be found in the database
+[2026-02-07 23:02:22] Error ERROR: Controller execution failed: Failed to parse time string (05-FEB-26 05.14.27.669000 PM) at position 26 (P): The timezone could not be found in the database
+[2026-02-07 23:03:13] Error ERROR: Controller execution failed: Failed to parse time string (05-FEB-26 05.14.27.669000 PM) at position 26 (P): The timezone could not be found in the database
+[2026-02-07 23:08:12] Error ERROR: Controller execution failed: Failed to parse time string (05-FEB-26 05.14.27.669000 PM) at position 26 (P): The timezone could not be found in the database
+[2026-02-07 23:12:52] Error ERROR: Controller execution failed: Failed to parse time string (05-FEB-26 05.14.27.669000 PM) at position 26 (P): The timezone could not be found in the database
+[2026-02-07 23:21:39] Error ERROR: Controller execution failed: Failed to parse time string (05-FEB-26 05.14.27.669000 PM) at position 26 (P): The timezone could not be found in the database
+[2026-02-07 23:26:57] Error ERROR: Controller execution failed: Failed to parse time string (05-FEB-26 05.14.27.669000 PM) at position 26 (P): The timezone could not be found in the database
+[2026-02-07 23:30:08] Error ERROR: Controller execution failed: Failed to parse time string (05-FEB-26 05.14.27.669000 PM) at position 26 (P): The timezone could not be found in the database
+[2026-02-07 23:31:09] Error ERROR: Controller execution failed: Failed to parse time string (05-FEB-26 05.14.27.669000 PM) at position 26 (P): The timezone could not be found in the database
+[2026-03-08 11:14:43] Error 500: Database connection failed: ORA-01109: database not open
+[2026-03-08 11:14:43] Error 500: Controller execution failed: Database connection failed.
+[2026-03-08 11:14:43] Error 500: Database connection failed: ORA-01109: database not open
+[2026-03-08 11:14:43] Error 500: Controller execution failed: Database connection failed.
+[2026-03-08 11:15:33] Error 500: Database connection failed: ORA-01109: database not open
+[2026-03-08 11:15:33] Error 500: Controller execution failed: Database connection failed.
+[2026-03-08 11:15:47] Error 500: Database connection failed: ORA-01109: database not open
+[2026-03-08 11:15:47] Error 500: Controller execution failed: Database connection failed.
+[2026-03-08 11:15:49] Error 500: Database connection failed: ORA-01109: database not open
+[2026-03-08 11:15:49] Error 500: Controller execution failed: Database connection failed.
+[2026-03-08 11:15:51] Error 500: Database connection failed: ORA-01109: database not open
+[2026-03-08 11:15:51] Error 500: Controller execution failed: Database connection failed.
+[2026-03-08 11:18:23] Error 500: Database connection failed: ORA-28001: the password has expired
+[2026-03-08 11:18:23] Error 500: Controller execution failed: Database connection failed.
+[2026-03-08 11:18:28] Error 500: Database connection failed: ORA-28001: the password has expired
+[2026-03-08 11:18:28] Error 500: Controller execution failed: Database connection failed.
