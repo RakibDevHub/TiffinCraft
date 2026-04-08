@@ -110,7 +110,7 @@ $profileImage = $_SESSION['user_image'] ?? '';
         </div>
     </div>
 
-    <!-- Mobile Navigation links (shown when hamburger is clicked) -->
+    <!-- Mobile Navigation links -->
     <nav class="nav-links mobile-menu" id="mobileNavLinks">
         <?php if (!$isBusinessView): ?>
             <a href="/" class="<?= $currentPage == 'home' ? 'active' : '' ?>">Home</a>

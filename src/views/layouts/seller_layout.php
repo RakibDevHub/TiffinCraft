@@ -71,7 +71,6 @@ $csrfToken = $_SESSION['csrf_token'] ?? '';
 					<?php endif; ?>
 				</button>
 				<div class="dropdown" id="dropdownMenu">
-					<!-- <a href="#"><i class="fas fa-user-circle"></i> Profile</a> -->
 					<a href="/business/dashboard/settings"><i class="fas fa-cog"></i> Settings</a>
 					<div class="dropdown-divider"></div>
 					<a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
