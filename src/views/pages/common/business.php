@@ -59,33 +59,29 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                     </p>
                 </div>
                 <div class="features-grid">
-                    <!-- Fast Delivery Card -->
+                    <!-- Grow Your Customer Base Card -->
                     <div class="feature-card">
                         <div class="feature-icon orange">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                             </svg>
                         </div>
-                        <h3 class="feature-title">Fast Delivery</h3>
-                        <p class="feature-text">Fresh meals delivered in under 45 minutes</p>
+                        <h3 class="feature-title">Grow Your Customer Base</h3>
+                        <p class="feature-text">Reach hundreds of food lovers in your area looking for homemade meals.</p>
                     </div>
 
-                    <!-- Quality Assured Card -->
+                    <!-- Easy Order Management Card -->
                     <div class="feature-card">
                         <div class="feature-icon blue">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 12l2 2 4-4m5.618-4.016A12.955 12.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                             </svg>
                         </div>
-                        <h3 class="feature-title">Quality Assured</h3>
-                        <p class="feature-text">All home chefs pass rigorous quality checks</p>
+                        <h3 class="feature-title">Easy Order Management</h3>
+                        <p class="feature-text">Our dashboard helps you track orders, payments, and customer feedback in one place.</p>
                     </div>
 
-                    <!-- Affordable Prices Card -->
+                    <!-- Fair Earnings Card -->
                     <div class="feature-card">
                         <div class="feature-icon green">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" fill="none"
@@ -94,10 +90,9 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                                     d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
-                        <h3 class="feature-title">Affordable Prices</h3>
-                        <p class="feature-text">Home-cooked meals at restaurant quality prices</p>
+                        <h3 class="feature-title">Fair Earnings</h3>
+                        <p class="feature-text">Keep most of what you earn with our low commission rates.</p>
                     </div>
-
                 </div>
             </div>
 
@@ -185,13 +180,13 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                                 <!-- Card Header -->
                                 <div class="card-header <?php echo $isHighlight ? 'bg-highlight' : 'bg-normal'; ?>">
                                     <?php if ($isHighlight): ?>
-                                        <div class="popular-badge">MOST POPULAR</div>
+                                        <div class="popular-badge">Featured Plan</div>
                                     <?php endif; ?>
 
                                     <h3 class="plan-name"><?php echo htmlspecialchars($plan['PLAN_NAME'] ?? 'Unnamed Plan'); ?></h3>
 
                                     <div class="plan-price">
-                                        <span class="price">৳<?php echo number_format($plan['MONTHLY_FEE'] ?? 0); ?></span>
+                                        <span class="price" style="<?php echo $isHighlight ? 'color: white;' : 'color: #1f2937;' ?>">৳<?php echo number_format($plan['MONTHLY_FEE'] ?? 0); ?></span>
                                         <span class="period">/month</span>
                                     </div>
 
@@ -224,46 +219,6 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                                             <i class="fas fa-check-circle feature-icon"></i>
                                             <span>support 24/7</span>
                                         </li>
-
-                                        <!-- Plan-specific features based on plan name -->
-                                        <!-- 
-                                        <?php if ($planName == 'starter'): ?>
-                                            <li class="feature-item">
-                                                <i class="fas fa-check-circle feature-icon"></i>
-                                                <span>Basic analytics</span>
-                                            </li>
-                                            <li class="feature-item">
-                                                <i class="fas fa-check-circle feature-icon"></i>
-                                                <span>Standard support</span>
-                                            </li>
-                                        <?php elseif ($planName == 'growth'): ?>
-                                            <li class="feature-item">
-                                                <i class="fas fa-check-circle feature-icon"></i>
-                                                <span>Priority listing</span>
-                                            </li>
-                                            <li class="feature-item">
-                                                <i class="fas fa-check-circle feature-icon"></i>
-                                                <span>Advanced analytics</span>
-                                            </li>
-                                            <li class="feature-item">
-                                                <i class="fas fa-check-circle feature-icon"></i>
-                                                <span>Marketing tools</span>
-                                            </li>
-                                        <?php elseif ($planName == 'pro'): ?>
-                                            <li class="feature-item">
-                                                <i class="fas fa-check-circle feature-icon"></i>
-                                                <span>Featured placement</span>
-                                            </li>
-                                            <li class="feature-item">
-                                                <i class="fas fa-check-circle feature-icon"></i>
-                                                <span>Premium analytics</span>
-                                            </li>
-
-                                            <li class="feature-item">
-                                                <i class="fas fa-check-circle feature-icon"></i>
-                                                <span>Custom branding</span>
-                                            </li>
-                                        <?php endif; ?> -->
                                     </ul>
                                 </div>
                             </div>
@@ -354,14 +309,6 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                         Login to Your Account
                     </a>
                 </div>
-
-                <!-- <?php
-                        $fillColor = '#FFFBEB';
-                        $invert = true;
-                        $offset = true;
-
-                        include BASE_PATH . '/src/views/components/divider-banner.php';
-                        ?> -->
             </div>
     </section>
 </main>

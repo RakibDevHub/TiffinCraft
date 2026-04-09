@@ -417,46 +417,46 @@ class PageController
     }
 
 
-    // public function business()
-    // {
-    //     $categories = $this->categoryModel->getFeaturedCategories();
-    //     $featuredKitchens = $this->kitchenModel->getFeaturedKitchens(10);
-    //     $platform_reviews = $this->reviewModel->getTiffinCraftReviews();
-    //     $reviewStats = $this->reviewModel->getTiffinCraftStats();
-    //     $subscriptionPlans = $this->subscriptionModel->getAllActivePlans();
+    public function business()
+    {
+        $categories = $this->categoryModel->getFeaturedCategories();
+        $featuredKitchens = $this->kitchenModel->getFeaturedKitchens(10);
+        $platform_reviews = $this->reviewModel->getTiffinCraftReviews();
+        $reviewStats = $this->reviewModel->getTiffinCraftStats();
+        $subscriptionPlans = $this->subscriptionModel->getAllActivePlans();
 
-    //     $kitchenFavorites = [];
-    //     $hasReviewed = false;
+        $kitchenFavorites = [];
+        $hasReviewed = false;
 
-    //     if (AuthHelper::isLoggedIn()) {
-    //         $userId = Session::get('user_id');
-    //         foreach ($featuredKitchens['kitchens'] as $kitchen) {
-    //             $kitchenFavorites[$kitchen['KITCHEN_ID']] = $this->favoriteModel->isItemInFavorites(
-    //                 $userId,
-    //                 $kitchen['KITCHEN_ID'],
-    //                 'KITCHEN'
-    //             );
-    //         }
+        if (AuthHelper::isLoggedIn()) {
+            $userId = Session::get('user_id');
+            foreach ($featuredKitchens['kitchens'] as $kitchen) {
+                $kitchenFavorites[$kitchen['KITCHEN_ID']] = $this->favoriteModel->isItemInFavorites(
+                    $userId,
+                    $kitchen['KITCHEN_ID'],
+                    'KITCHEN'
+                );
+            }
 
-    //         $hasReviewed = $this->reviewModel->hasUserReviewedTiffinCraft($userId);
-    //     }
+            $hasReviewed = $this->reviewModel->hasUserReviewedTiffinCraft($userId);
+        }
 
-    //     CSRF::generateToken();
+        CSRF::generateToken();
 
-    //     return [
-    //         'title' => 'Business',
-    //         'page' => 'business',
-    //         'categories' => $categories,
-    //         'featuredKitchens' => $featuredKitchens['kitchens'],
-    //         'hasPublicRatings' => $featuredKitchens['hasPublicRatings'],
-    //         'hasAnyRatings' => $featuredKitchens['hasAnyRatings'],
-    //         'isLoggedIn' => AuthHelper::isLoggedIn(),
-    //         'platform_reviews' => $platform_reviews,
-    //         'reviewStats' => $reviewStats,
-    //         'hasReviewed' => $hasReviewed,
-    //         'kitchenFavorites' => $kitchenFavorites,
-    //         'subscriptionPlans' => $subscriptionPlans,
-    //         'viewFile' => BASE_PATH . '/src/views/pages/common/business.php',
-    //     ];
-    // }
+        return [
+            'title' => 'Business',
+            'page' => 'business',
+            'categories' => $categories,
+            'featuredKitchens' => $featuredKitchens['kitchens'],
+            'hasPublicRatings' => $featuredKitchens['hasPublicRatings'],
+            'hasAnyRatings' => $featuredKitchens['hasAnyRatings'],
+            'isLoggedIn' => AuthHelper::isLoggedIn(),
+            'platform_reviews' => $platform_reviews,
+            'reviewStats' => $reviewStats,
+            'hasReviewed' => $hasReviewed,
+            'kitchenFavorites' => $kitchenFavorites,
+            'subscriptionPlans' => $subscriptionPlans,
+            'viewFile' => BASE_PATH . '/src/views/pages/common/business.php',
+        ];
+    }
 }

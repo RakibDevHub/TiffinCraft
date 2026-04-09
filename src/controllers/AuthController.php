@@ -13,7 +13,7 @@ class AuthController
     public function logout()
     {
         Session::destroy();
-        header("Location: /login");
+        header("Location: /");
         exit;
     }
 

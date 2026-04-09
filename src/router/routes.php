@@ -5,18 +5,19 @@ $routes = [
     // Public pages
     ''          => ['controller' => 'PageController', 'method' => 'home'],
     'home'      => ['controller' => 'PageController', 'method' => 'home'],
-    // 'business'      => ['controller' => 'PageController', 'method' => 'business'],
+    'business'      => ['controller' => 'PageController', 'method' => 'business'],
     'kitchens'  => ['controller' => 'PageController', 'method' => 'kitchens'],
     'dishes'    => ['controller' => 'PageController', 'method' => 'dishes'],
     'about'     => ['controller' => 'PageController', 'method' => 'about'],
     'contact'   => ['controller' => 'PageController', 'method' => 'contact'],
     'reviews' => ['controller' => 'PageController', 'method' => 'submitTiffinCraftReview'],
-    
+
     'dishe/review'    => ['controller' => 'ReviewController', 'method' => 'handleItemReview'],
     'kitchen/review' => ['controller' => 'ReviewController', 'method' => 'handleKitchenReview', 'role' => 'buyer'],
 
     // Auth
     'login'     => ['controller' => 'AuthController', 'method' => 'login'],
+    'business/login'     => ['controller' => 'AuthController', 'method' => 'login'],
     'register'  => ['controller' => 'AuthController', 'method' => 'register'],
     'logout'    => ['controller' => 'AuthController', 'method' => 'logout', 'role' => 'any'],
     'verify'    => ['controller' => 'AuthController', 'method' => 'verifyEmail'],
@@ -47,6 +48,8 @@ $routes = [
 
 
     // Admin
+    'admin/login'     => ['controller' => 'AuthController', 'method' => 'login'],
+
     'admin'       => ['controller' => 'AdminController', 'method' => 'dashboard', 'role' => 'admin'],
     'admin/dashboard'       => ['controller' => 'AdminController', 'method' => 'dashboard', 'role' => 'admin'],
     'admin/dashboard/users'       => ['controller' => 'AdminController', 'method' => 'manageUsers', 'role' => 'admin'],

@@ -13,7 +13,7 @@ if ($normalizedPath === '' || $normalizedPath === '/home') {
 }
 
 if ($isHomeView && !AuthHelper::isLoggedIn()) {
-    // include BASE_PATH . '/src/views/components/cta-bar.php';
+    include BASE_PATH . '/src/views/components/cta-bar.php';
 }
 
 $isBusinessView = str_starts_with($path, '/business');
@@ -44,8 +44,8 @@ $profileImage = $_SESSION['user_image'] ?? '';
         <!-- Desktop Auth buttons -->
         <?php if (!AuthHelper::isLoggedIn()): ?>
             <div class="auth-buttons desktop">
-                <a href="/login" class="btn login">Login</a>
-                <a href="/register" class="btn register">Register</a>
+                <a href="<?= $isBusinessView ? '/business/' : '/' ?>login" class="btn login">Login</a>
+                <a href="<?= $isBusinessView ? '/business/' : '/' ?>register" class="btn register">Register</a>
             </div>
         <?php else: ?>
             <div class="auth-buttons desktop" style="position: relative;">

@@ -137,6 +137,12 @@ main {
     color: white;
 }
 
+.subscription-section .bg-normal {
+    background-color: #f0fdf4 !important;
+    /* orange-500 */
+    color: white;
+}
+
 .subscription-section .popular-badge {
     display: inline-block;
     padding: 0.25rem 1rem;
@@ -177,11 +183,6 @@ main {
     font-size: 2.5rem;
     font-weight: 700;
     line-height: 1;
-    color: white;
-}
-
-.subscription-section .price {
-    color: #1f2937;
 }
 
 .subscription-section .period {
@@ -221,7 +222,6 @@ main {
 .subscription-section .feature-list {
     list-style: none;
     padding: 0;
-    margin: 0 0 2rem 0;
     flex: 1;
 }
 
@@ -239,7 +239,7 @@ main {
 .subscription-section .feature-icon {
     height: 1.25rem;
     width: 1.25rem;
-    color: #4f46e5;
+    color: #22c55e;
     margin: 0;
     margin-top: 0.125rem;
     margin-right: 0.75rem;
