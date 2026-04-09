@@ -1,13 +1,13 @@
 <?php
-$categories = $data['categories'];
-$kitchens = $data['featuredKitchens'];
-$hasPublicRatings = $data['hasPublicRatings'];
-$hasAnyRatings = $data['hasAnyRatings'];
-$isLoggedIn = $data['isLoggedIn'];
-$platform_reviews = $data['platform_reviews'];
-$reviewStats = $data['reviewStats'];
-$hasReviewed = $data['hasReviewed'];
-$totalReviews = count($platform_reviews);
+// $categories = $data['categories'];
+// $kitchens = $data['featuredKitchens'];
+// $hasPublicRatings = $data['hasPublicRatings'];
+// $hasAnyRatings = $data['hasAnyRatings'];
+// $isLoggedIn = $data['isLoggedIn'];
+// $platform_reviews = $data['platform_reviews'];
+// $reviewStats = $data['reviewStats'];
+// $hasReviewed = $data['hasReviewed'];
+// $totalReviews = count($platform_reviews);
 
 
 $plans = $data['subscriptionPlans'];
@@ -291,7 +291,6 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
             include BASE_PATH . '/src/views/components/divider-banner.php';
             ?>
         </div>
-
 
         <!-- CTA SECTION -->
         <div class="cta-section" style="background-color: #f97316;">
