@@ -9,7 +9,7 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
     <section class="home-section">
 
         <!-- HERO SECTION -->
-        <div class="hero-section">
+        <div class="hero-section business">
             <div class="hero-overlay"></div>
             <div class="hero-container">
                 <h1>Grow Your Business</h1>

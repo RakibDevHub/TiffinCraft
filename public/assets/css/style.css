@@ -327,7 +327,7 @@ main {
     box-shadow: 0 8px 12px -3px rgba(249, 115, 22, 0.3);
 }
 
-.subscription-section .btn-highlight{
+.subscription-section .btn-highlight {
     color: white;
     background-color: #f97316;
     border: 1px solid #f97316;
@@ -1477,9 +1477,15 @@ main {
 
 /* ===== HOME PAGE STYLES ===== */
 
-.hero-section {
-    /* background-image: url('../images/HeroBG.jpeg'); */
+.hero-section.hero {
+    background-image: url('../images/HeroBG.jpeg');
+}
+
+.hero-section.business {
     background-image: url('../images/b-hero.jpg');
+}
+
+.hero-section {
     background-size: cover;
     height: calc(100vh - 60px);
     display: flex;
@@ -1525,7 +1531,7 @@ main {
     gap: 1rem;
 }
 
-.hero-btn a{
+.hero-btn a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1543,6 +1549,7 @@ main {
 .hero-btn .btn-primary:hover {
     background: #ea580c !important;
 }
+
 .hero-btn .btn-secondary {
     padding: 0.75rem 2rem;
     text-decoration: none;
@@ -2639,7 +2646,7 @@ main {
     background: #fff;
 }
 
-.login-prompt{
+.login-prompt {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -3239,7 +3246,7 @@ main {
 /* ===== DISHES PAGE STYLES ===== */
 
 .dishes-page .page-header,
-.kitchen-page .page-header{
+.kitchen-page .page-header {
     align-items: center;
 }
 
