@@ -2,7 +2,7 @@
 $currentPage = $page ?? 'home';
 
 $isHomeView = true;
-// $isBusinessView = false;
+$isBusinessView = false;
 
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $normalizedPath = rtrim($path, '/');

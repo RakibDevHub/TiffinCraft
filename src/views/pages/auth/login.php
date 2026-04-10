@@ -6,7 +6,7 @@
     
                 <div class="auth-card-header">
                     <h1 class="auth-title">Welcome Back</h1>
-                    <p class="auth-subtitle">Login to your TiffinCraft account</p>
+                    <p class="auth-subtitle">Login to your TiffinCraft <?php echo $isBusinessView ? 'Business' : ''; ?> account</p>
                 </div>
     
                 <div class="auth-card-body">

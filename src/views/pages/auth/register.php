@@ -6,9 +6,9 @@
 
                 <!-- Header -->
                 <div class="auth-card-header">
-                    <h1 class="auth-title">Create Your Account</h1>
+                    <h1 class="auth-title"><?php echo $isBusinessView ? 'Create Your Business Account' : 'Create Your Account'; ?></h1>
                     <p class="auth-subtitle">
-                        Join TiffinCraft as a buyer or a seller
+                        Join TiffinCraft as a <?php echo $isBusinessView ? 'Seller' : 'Buyer'; ?>
                     </p>
                 </div>
 
@@ -57,10 +57,15 @@
                             <!-- User Role -->
                             <div class="form-group">
                                 <label for="role">Register as</label>
-                                <select name="role" id="role" required>
-                                    <option value="buyer">Buyer</option>
-                                    <option value="seller">Seller</option>
+                                <select name="role_display" id="role" required <?php echo $isBusinessView ? 'disabled style="background-color: #f5f5f5;"' : ''; ?>>
+                                    <option value="buyer" <?php echo (!$isBusinessView) ? 'selected' : ''; ?>>Buyer</option>
+                                    <option value="seller" <?php echo $isBusinessView ? 'selected' : ''; ?>>Seller</option>
                                 </select>
+                                <?php if ($isBusinessView): ?>
+                                    <input type="hidden" name="role" value="seller">
+                                <?php else: ?>
+                                    <input type="hidden" name="role" value="buyer">
+                                <?php endif; ?>
                             </div>
                         </div>
 
@@ -81,7 +86,7 @@
 
                     <div class="auth-link">
                         Already have an account?
-                        <a href="/login">Login here</a>
+                        <a href="<?php echo $isBusinessView ? '/business/login' : '/login'; ?>">Login here</a>
                     </div>
                 </div>
             </div>

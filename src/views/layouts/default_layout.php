@@ -8,6 +8,8 @@ $roleFromUrl = $data['extra']['roleFromUrl'] ?? '';
 $formAction = $data['extra']['formAction'] ?? '';
 
 $csrfToken = $_SESSION['csrf_token'] ?? '';
+
+$isBusinessView = strpos($_SERVER['REQUEST_URI'], '/business') === 0;
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +18,7 @@ $csrfToken = $_SESSION['csrf_token'] ?? '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TiffinCraft - <?= ucfirst($title) ?></title>
+    <title>TiffinCraft <?= $isBusinessView ? 'Business' : '' ?> - <?= ucfirst($title) ?></title>
 
     <!-- Public CSS -->
     <link rel="stylesheet" href="/assets/css/style.css">

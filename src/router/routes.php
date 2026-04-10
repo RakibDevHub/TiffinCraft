@@ -19,6 +19,7 @@ $routes = [
     'login'     => ['controller' => 'AuthController', 'method' => 'login'],
     'business/login'     => ['controller' => 'AuthController', 'method' => 'login'],
     'register'  => ['controller' => 'AuthController', 'method' => 'register'],
+    'business/register'  => ['controller' => 'AuthController', 'method' => 'register'],
     'logout'    => ['controller' => 'AuthController', 'method' => 'logout', 'role' => 'any'],
     'verify'    => ['controller' => 'AuthController', 'method' => 'verifyEmail'],
     'resend-verification'    => ['controller' => 'AuthController', 'method' => 'resendVerification'],
@@ -48,8 +49,6 @@ $routes = [
 
 
     // Admin
-    'admin/login'     => ['controller' => 'AuthController', 'method' => 'login'],
-
     'admin'       => ['controller' => 'AdminController', 'method' => 'dashboard', 'role' => 'admin'],
     'admin/dashboard'       => ['controller' => 'AdminController', 'method' => 'dashboard', 'role' => 'admin'],
     'admin/dashboard/users'       => ['controller' => 'AdminController', 'method' => 'manageUsers', 'role' => 'admin'],

@@ -1,32 +1,6 @@
 <?php
-// $categories = $data['categories'];
-// $kitchens = $data['featuredKitchens'];
-// $hasPublicRatings = $data['hasPublicRatings'];
-// $hasAnyRatings = $data['hasAnyRatings'];
-// $isLoggedIn = $data['isLoggedIn'];
-// $platform_reviews = $data['platform_reviews'];
-// $reviewStats = $data['reviewStats'];
-// $hasReviewed = $data['hasReviewed'];
-// $totalReviews = count($platform_reviews);
-
 
 $plans = $data['subscriptionPlans'];
-
-
-function dateFormat($dateString, $format = 'M j, Y')
-{
-    if (!$dateString) {
-        return '';
-    }
-
-    $date = DateTime::createFromFormat('d-M-y h.i.s.u A', $dateString);
-
-    if ($date) {
-        return $date->format($format);
-    }
-
-    return htmlspecialchars((string)$dateString);
-}
 
 include BASE_PATH . '/src/views/components/flash-popup.php';
 ?>
@@ -220,6 +194,10 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                                             <span>support 24/7</span>
                                         </li>
                                     </ul>
+
+                                    <a href="/business/register" class="btn <?php echo $isHighlight ? 'btn-highlight' : 'btn-sub'; ?>">
+                                        Choose <?php echo htmlspecialchars($plan['PLAN_NAME'] ?? 'Unnamed Plan'); ?>
+                                    </a>
                                 </div>
                             </div>
                         <?php
@@ -302,7 +280,7 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                 </p>
                 <div class="button-container">
                     <a href="/business/register" class="btn-orange">
-                        Sign Up Now - It's Free
+                        Sign Up Now
                     </a>
                     <a href="/business/login" class="btn-secondary">
                         Login to Your Account
@@ -313,65 +291,7 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
 </main>
 
 <!-- SCRIPTS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-    // Initialize Swiper for kitchens slider
-    document.addEventListener('DOMContentLoaded', () => {
-        const swiper = new Swiper('.myKitchensSwiper', {
-            slidesPerView: 1,
-            spaceBetween: 20,
-            loop: true,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            breakpoints: {
-                640: {
-                    slidesPerView: 2
-                },
-                1024: {
-                    slidesPerView: 3
-                },
-            },
-        });
-
-        document.querySelectorAll('.kitchen-card').forEach(card => {
-            card.addEventListener('click', function() {
-                window.location.href = this.dataset.url;
-            });
-        });
-    });
-
-    // Star rating hover effect
-    document.addEventListener('DOMContentLoaded', function() {
-        const starLabels = document.querySelectorAll('.star-rating-label');
-
-        starLabels.forEach(label => {
-            label.addEventListener('mouseover', function() {
-                let current = this;
-                while (current) {
-                    current.style.color = '#f59e0b';
-                    current = current.nextElementSibling;
-                }
-            });
-
-            label.addEventListener('mouseout', function() {
-                const input = this.previousElementSibling;
-                if (!input || !input.checked) {
-                    let current = this;
-                    while (current) {
-                        current.style.color = '#d1d5db';
-                        current = current.nextElementSibling;
-                    }
-                }
-            });
-        });
-    });
-
     // Auto-hide toast after 5 seconds
     <?php if (isset($_SESSION['toast'])): ?>
         setTimeout(() => {

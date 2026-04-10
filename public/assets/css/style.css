@@ -223,6 +223,7 @@ main {
     list-style: none;
     padding: 0;
     flex: 1;
+    margin-bottom: 1.5rem;
 }
 
 .subscription-section .feature-item {
@@ -324,6 +325,33 @@ main {
     border-color: #ea580c;
     transform: translateY(-2px);
     box-shadow: 0 8px 12px -3px rgba(249, 115, 22, 0.3);
+}
+
+.subscription-section .btn-highlight{
+    color: white;
+    background-color: #f97316;
+    border: 1px solid #f97316;
+    justify-content: center;
+}
+
+.subscription-section .btn-highlight:hover {
+    background-color: #ea580c;
+    border-color: #ea580c;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 12px -3px rgba(249, 115, 22, 0.3);
+}
+
+.subscription-section .btn-sub {
+    color: #6b7280;
+    background-color: transparent;
+    border: 1px solid #a2f6bb;
+    justify-content: center;
+}
+
+.subscription-section .btn-sub:hover {
+    background-color: #a2f6bb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(249, 115, 22, 0.2);
 }
 
 /* No plans message */

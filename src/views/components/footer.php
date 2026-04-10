@@ -33,14 +33,14 @@ $requestUri = $_SERVER['REQUEST_URI'];
             </div>
 
             <!-- Business Links -->
-            <!-- <div class="footer-links-block">
+            <div class="footer-links-block">
                 <h3 class="links-title">TiffinCraft Business</h3>
                 <ul class="links-list">
                     <li><a href="/business" class="<?= strpos($requestUri, '/business') === 0 ? 'active-link' : 'link' ?>">Sell on Our Platform</a></li>
                     <li><a href="/business/login" class="<?= strpos($requestUri, '/business/login') === 0 ? 'active-link' : 'link' ?>">Login to Your Account</a></li>
                     <li><a href="/business/register" class="<?= strpos($requestUri, '/business/register') === 0 ? 'active-link' : 'link' ?>">Open a Business Account</a></li>
                 </ul>
-            </div> -->
+            </div>
 
             <!-- Contact -->
             <div class="footer-links-block">

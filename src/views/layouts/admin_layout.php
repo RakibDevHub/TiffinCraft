@@ -17,7 +17,7 @@ $csrfToken = $_SESSION['csrf_token'] ?? '';
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>TiffinCraft - <?= htmlspecialchars(ucfirst($title)) ?></title>
+	<title>TiffinCraft Admin - <?= htmlspecialchars(ucfirst($title)) ?></title>
 
 	<link rel="stylesheet" href="/assets/css/dashboard.css">
 

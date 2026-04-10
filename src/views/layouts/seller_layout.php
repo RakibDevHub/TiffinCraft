@@ -9,6 +9,8 @@ $userGender = strtolower($currentUser['GENDER'] ?? '');
 $profileImage = htmlspecialchars($currentUser['PROFILE_IMAGE'] ?? '');
 
 $csrfToken = $_SESSION['csrf_token'] ?? '';
+
+$isBusinessView = strpos($_SERVER['REQUEST_URI'], '/business') === 0;
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +19,7 @@ $csrfToken = $_SESSION['csrf_token'] ?? '';
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>TiffinCraft - <?= htmlspecialchars(ucfirst($title)) ?></title>
+	<title>TiffinCraft Business - <?= htmlspecialchars(ucfirst($title)) ?></title>
 
 	<link rel="stylesheet" href="/assets/css/dashboard.css">
 	<link rel="stylesheet" href="/assets/css/seller-dashboard.css">
@@ -55,7 +57,12 @@ $csrfToken = $_SESSION['csrf_token'] ?? '';
 				<div class="toggle-btn" onclick="toggleSidebar()">
 					<i class="fas fa-bars"></i>
 				</div>
-				<a href="/" class="logo-link"><img src="/assets/images/logo.png" alt="TiffinCraft"></a>
+				<!-- Logo -->
+				<div class="logo">
+					<a href="<?= $isBusinessView ? '/business' : '/' ?>"><img src="/assets/images/logo.png" alt="TiffinCraft">
+						<?= $isBusinessView ? '<span class="logo-subtext">Business</span>' : '' ?>
+					</a>
+				</div>
 			</div>
 			<div class="topbar-right">
 				<button class="profile-btn" onclick="toggleDropdown()">
