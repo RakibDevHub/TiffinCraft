@@ -63,7 +63,7 @@ $routes = [
     'admin/dashboard/withdrawals'       => ['controller' => 'AdminController', 'method' => 'manageWithdrawals', 'role' => 'admin'],
     'admin/dashboard/transactions'       => ['controller' => 'AdminController', 'method' => 'viewTransactions', 'role' => 'admin'],
 
-    // New Seller
+    // Seller
     'business/dashboard/kitchen-setup'    => ['controller' => 'SellerController', 'method' => 'kitchenSetup', 'role' => 'seller'],
     'business/dashboard/select-plan'    => ['controller' => 'SellerController', 'method' => 'planSelection', 'role' => 'seller'],
     // 'business/dashboard/subscription/payment'    => ['controller' => 'PaymentController', 'method' => 'processPayment', 'role' => 'seller'],
@@ -71,7 +71,6 @@ $routes = [
     'business/dashboard/subscription/payment'    => ['controller' => 'PaymentController', 'method' => 'processSubscriptionPayment', 'role' => 'seller'],
     'business/dashboard/subscription/callback'    => ['controller' => 'PaymentController', 'method' => 'subscriptionPaymentCallback', 'role' => 'seller'],
 
-    // Seller
     'business/dashboard'    => ['controller' => 'SellerController', 'method' => 'dashboard', 'role' => 'seller'],
     'business/dashboard/orders'    => ['controller' => 'SellerController', 'method' => 'manageOrders', 'role' => 'seller'],
     'business/dashboard/menu-items'    => ['controller' => 'SellerController', 'method' => 'manageMenu', 'role' => 'seller'],

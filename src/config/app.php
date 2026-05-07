@@ -18,9 +18,9 @@ define('MAIL_FROM_NAME', 'TiffinCraft');
 
 
 // === SSLCommerz ===
-define('SSLCOMMERZ_LIVE', $_ENV['SSLCOMMERZ_LIVE '] ?? false);
 define('SSLCOMMERZ_STORE_ID', $_ENV['SSLCOMMERZ_STORE_ID'] ?? 'tiffi6899ad31bafdc');
 define('SSLCOMMERZ_STORE_PASSWORD', $_ENV['SSLCOMMERZ_STORE_PASSWORD'] ?? 'tiffi6899ad31bafdc@ssl');
+define('SSLCOMMERZ_LIVE', $_ENV['SSLCOMMERZ_LIVE '] ?? false);
 
 // === Timezone ===
 date_default_timezone_set($_ENV['APP_TIMEZONE'] ?? 'Asia/Dhaka');

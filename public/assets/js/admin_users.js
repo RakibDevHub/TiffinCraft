@@ -1,3 +1,4 @@
+// Change items per page
 function changeLimit(newLimit) {
   const url = new URL(window.location.href);
   url.searchParams.set("limit", newLimit);
@@ -5,18 +6,19 @@ function changeLimit(newLimit) {
   window.location.href = url.toString();
 }
 
-// Modal functions
+// Open suspend user modal
 function openSuspendModal(userId, userName) {
   document.getElementById("suspendUserId").value = userId;
   document.getElementById("suspendUserName").value = userName;
   document.getElementById("suspendModal").classList.add("active");
 }
 
+// Open lift suspension modal with suspension details
 function openLiftSuspensionModal(
   userId,
   userName,
   suspensionReason,
-  suspendedUntil
+  suspendedUntil,
 ) {
   document.getElementById("liftSuspensionUserId").value = userId;
   document.getElementById("liftSuspensionUserName").textContent = userName;
@@ -34,16 +36,19 @@ function openLiftSuspensionModal(
   document.getElementById("liftSuspensionModal").classList.add("active");
 }
 
+// Open delete user modal
 function openDeleteModal(userId, userName) {
   document.getElementById("deleteUserId").value = userId;
   document.getElementById("deleteUserName").textContent = userName;
   document.getElementById("deleteModal").classList.add("active");
 }
 
+// Open add admin modal
 function openAddAdminModal() {
   document.getElementById("addAdminModal").classList.add("active");
 }
 
+// View user details modal
 function viewUserDetails(userId) {
   const allDetails = document.querySelectorAll(".user-details-content");
   allDetails.forEach((detail) => (detail.style.display = "none"));
@@ -59,10 +64,12 @@ function viewUserDetails(userId) {
   if (scrollContainer) scrollContainer.scrollTop = 0;
 }
 
+// Close any modal
 function closeModal(modalId) {
   document.getElementById(modalId).classList.remove("active");
 }
 
+// Filter users by search, role and status
 function filterUsers() {
   const searchText = (
     document.getElementById("userSearch")?.value || ""
@@ -90,6 +97,7 @@ function filterUsers() {
   });
 }
 
+// Clear all filters
 function clearFilters() {
   const search = document.getElementById("userSearch");
   const role = document.getElementById("roleFilter");
@@ -102,31 +110,35 @@ function clearFilters() {
   filterUsers();
 }
 
-// Initialize
+// Initialize on page load
 document.addEventListener("DOMContentLoaded", function () {
-
-  // Event listeners
+  // Add admin button
   const addAdminBtn = document.getElementById("addAdminBtn");
   if (addAdminBtn) addAdminBtn.addEventListener("click", openAddAdminModal);
 
+  // Clear filters button
   const clearFiltersBtn = document.getElementById("clearFilters");
   if (clearFiltersBtn) clearFiltersBtn.addEventListener("click", clearFilters);
 
+  // Search input
   const userSearch = document.getElementById("userSearch");
   if (userSearch) userSearch.addEventListener("input", filterUsers);
 
+  // Role filter
   const roleFilter = document.getElementById("roleFilter");
   if (roleFilter) roleFilter.addEventListener("change", filterUsers);
 
+  // Status filter
   const statusFilter = document.getElementById("statusFilter");
   if (statusFilter) statusFilter.addEventListener("change", filterUsers);
 
-  // Modal overlay close
+  // Close modal when clicking overlay
   document.querySelectorAll(".modal-overlay").forEach((overlay) => {
     overlay.addEventListener("click", (e) => {
       if (e.target === overlay) overlay.classList.remove("active");
     });
   });
 
+  // Initial filter
   filterUsers();
 });

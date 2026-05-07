@@ -239,7 +239,7 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                     <h4>No reviews yet</h4>
                     <p>Your customers haven't left any reviews yet. They'll appear here once someone reviews your kitchen or menu items.</p>
                     <div class="empty-actions">
-                        <a href="/seller/menu" class="btn btn-primary">
+                        <a href="/business/dashboard/menu-items" class="btn btn-primary">
                             <i class="fas fa-utensils"></i> View Menu
                         </a>
                     </div>
@@ -651,17 +651,6 @@ function include_review_card($review)
         box-shadow: var(--shadow-lg);
     }
 
-    .card-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1.25rem 1.5rem;
-        border-bottom: 1px solid var(--gray-200);
-        flex-wrap: wrap;
-        gap: 1rem;
-        margin: 0;
-    }
-
     .header-left {
         display: flex;
         align-items: center;
@@ -678,10 +667,6 @@ function include_review_card($review)
         font-size: 1.125rem;
         font-weight: 600;
         color: var(--gray-800);
-    }
-
-    .card-body {
-        padding: 1.5rem;
     }
 
     /* Rating Distribution */

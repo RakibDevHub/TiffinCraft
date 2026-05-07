@@ -192,7 +192,7 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                 <?php if (!empty($menuItems)): ?>
                     <div class="menu-grid">
                         <?php foreach ($menuItems as $item): ?>
-                            <div class="menu-item-card" onclick="window.location.href='/item/<?= $item['ITEM_ID'] ?>'">
+                            <div class="menu-item-card" onclick="window.location.href='/dishes?view=item&id=<?= $item['ITEM_ID'] ?>'">
                                 <!-- Favorite Button -->
                                 <?php if ($isLoggedIn): ?>
                                     <form method="POST" action="/favorites/toggle" class="inline-form" onclick="event.stopPropagation()">

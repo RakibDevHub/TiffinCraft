@@ -17,16 +17,17 @@ function dateFormat($dateString, $format = 'M j, Y')
         return $date->format($format);
     }
 
-    return htmlspecialchars((string)$dateString);
+    return htmlspecialchars((string) $dateString);
 }
 
 include BASE_PATH . '/src/views/components/flash-popup.php';
 ?>
 
 <!-- Page Header  -->
-<div class="page-header">
-    <h1 class="page-title"><?= htmlspecialchars(ucfirst($title)) ?></h1>
-    <p class="page-subtitle">Manage buyer and seller accounts, suspend users, and add administrative staff</p>
+<div class="page-header dashboard-overview">
+    <h1 class="page-title" style="color: #fff;"><?= htmlspecialchars(ucfirst($title)) ?></h1>
+    <p class="page-subtitle" style="color: #fff;">Manage buyer and seller accounts, suspend users, and add
+        administrative staff</p>
 </div>
 
 <!-- Filters and Search -->
@@ -64,37 +65,12 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
 <!-- Users Table -->
 <div class="dashboard-card">
     <!-- Top Pagination -->
-    <div class="card-header">
+    <div class="card-header pagination-header">
         <div class="pagination-info">
-            Showing <?= ($page - 1) * $limit + 1 ?> to <?= min($page * $limit, $totalUsers) ?> of <?= $totalUsers ?> users
+            Showing <?= ($page - 1) * $limit + 1 ?> to <?= min($page * $limit, $totalUsers) ?> of <?= $totalUsers ?>
+            users
         </div>
-        <?php if ($totalPages > 1): ?>
-            <div class="pagination-controls">
-                <?php if ($page > 1): ?>
-                    <a href="?page=<?= $page - 1 ?>&limit=<?= $limit ?>" class="pagination-btn">
-                        <i class="fas fa-chevron-left"></i> Previous
-                    </a>
-                <?php endif; ?>
 
-                <?php
-                $startPage = max(1, $page - 2);
-                $endPage = min($totalPages, $page + 2);
-
-                for ($i = $startPage; $i <= $endPage; $i++):
-                ?>
-                    <a href="?page=<?= $i ?>&limit=<?= $limit ?>"
-                        class="pagination-btn <?= $i == $page ? 'active' : '' ?>">
-                        <?= $i ?>
-                    </a>
-                <?php endfor; ?>
-
-                <?php if ($page < $totalPages): ?>
-                    <a href="?page=<?= $page + 1 ?>&limit=<?= $limit ?>" class="pagination-btn">
-                        Next <i class="fas fa-chevron-right"></i>
-                    </a>
-                <?php endif; ?>
-            </div>
-        <?php endif; ?>
         <div class="pagination-limit">
             <label>Show:</label>
             <select onchange="changeLimit(this.value)">
@@ -107,7 +83,6 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
     </div>
 
     <div class="card-body">
-        <!-- <div class="table-responsive"> -->
         <table class="users-table">
             <thead>
                 <tr>
@@ -140,9 +115,11 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                             <td>
                                 <div class="user-info">
                                     <?php if (!empty($user['PROFILE_IMAGE'])): ?>
-                                        <img src="/uploads/profile/<?= htmlspecialchars($user['PROFILE_IMAGE']) ?>" class="user-avatar" alt="<?= htmlspecialchars($user['NAME'] ?? '') ?>">
+                                        <img src="/uploads/profile/<?= htmlspecialchars($user['PROFILE_IMAGE']) ?>"
+                                            class="user-avatar" alt="<?= htmlspecialchars($user['NAME'] ?? '') ?>">
                                     <?php else: ?>
-                                        <img src="https://ui-avatars.com/api/?name=<?= urlencode($user['NAME'] ?? '') ?>&background=4a6cf7&color=fff" class="user-avatar" alt="<?= htmlspecialchars($user['NAME'] ?? '') ?>">
+                                        <img src="https://ui-avatars.com/api/?name=<?= urlencode($user['NAME'] ?? '') ?>&background=4a6cf7&color=fff"
+                                            class="user-avatar" alt="<?= htmlspecialchars($user['NAME'] ?? '') ?>">
                                     <?php endif; ?>
                                     <div class="user-details">
                                         <h4><?= htmlspecialchars($user['NAME'] ?? '') ?></h4>
@@ -155,7 +132,8 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                             </td>
                             <td>
                                 <span class="<?= $roleClass ?>">
-                                    <i class="fas <?= $isAdmin ? 'fa-user-shield' : ($user['ROLE'] === 'seller' ? 'fa-store' : 'fa-user') ?>"></i>
+                                    <i
+                                        class="fas <?= $isAdmin ? 'fa-user-shield' : ($user['ROLE'] === 'seller' ? 'fa-store' : 'fa-user') ?>"></i>
                                     <?= htmlspecialchars($user['ROLE'] ?? '') ?>
                                 </span>
                             </td>
@@ -168,7 +146,8 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                                     </div>
                                 <?php else: ?>
                                     <span class="status-badge status-<?= strtolower($user['STATUS'] ?? 'active') ?>">
-                                        <i class="fas <?= ($user['STATUS'] ?? '') === 'active' ? 'fa-check-circle' : 'fa-clock' ?>"></i>
+                                        <i
+                                            class="fas <?= ($user['STATUS'] ?? '') === 'active' ? 'fa-check-circle' : 'fa-clock' ?>"></i>
                                         <?= htmlspecialchars($user['STATUS'] ?? 'Active') ?>
                                     </span>
                                 <?php endif; ?>
@@ -187,19 +166,19 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                             <td>
                                 <div class="action-buttons">
                                     <?php if ($isAdmin && !$isCurrentUser): ?>
-                                        <button class="btn-action btn-delete" onclick="openDeleteModal('<?= $user['USER_ID'] ?>', '<?= htmlspecialchars(addslashes($user['NAME'])) ?>')" title="Delete User">
+                                        <button class="btn-action btn-delete"
+                                            onclick="openDeleteModal('<?= $user['USER_ID'] ?>', '<?= htmlspecialchars(addslashes($user['NAME'])) ?>')"
+                                            title="Delete User">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     <?php elseif (!$isAdmin): ?>
                                         <?php if ($isSuspended): ?>
-                                            <button class="btn-action btn-activate"
-                                                onclick="openLiftSuspensionModal(
+                                            <button class="btn-action btn-activate" onclick="openLiftSuspensionModal(
                                                         '<?= $user['USER_ID'] ?>', 
                                                         '<?= htmlspecialchars(addslashes($user['NAME'])) ?>',
                                                         '<?= !empty($user['SUSPENSION_REASON']) ? htmlspecialchars(addslashes($user['SUSPENSION_REASON'])) : '' ?>',
                                                         '<?= !empty($user['SUSPENDED_UNTIL']) ? dateFormat($user['SUSPENDED_UNTIL'], 'M j, Y g:i A') : '' ?>'
-                                                    )"
-                                                title="Lift Suspension">
+                                                    )" title="Lift Suspension">
                                                 <i class="fas fa-unlock"></i>
                                             </button>
                                         <?php else: ?>
@@ -209,12 +188,15 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                                                 <i class="fa-solid fa-lock"></i>
                                             </button>
                                         <?php endif; ?>
-                                        <button class="btn-action btn-view" onclick="viewUserDetails('<?= $user['USER_ID'] ?>')" title="View Details">
+                                        <button class="btn-action btn-view" onclick="viewUserDetails('<?= $user['USER_ID'] ?>')"
+                                            title="View Details">
                                             <i class="fas fa-eye"></i>
                                         </button>
                                     <?php endif; ?>
                                     <?php if ($isCurrentUser): ?>
-                                        <span class="text-muted" style="padding: 4px 10px; border: 1px solid; border-radius: 15px; font-size: 10px; font-weight: 700; color: #52c41a; background-color: #f6ffed;">Current User</span>
+                                        <span class="text-muted"
+                                            style="padding: 4px 10px; border: 1px solid; border-radius: 15px; font-size: 10px; font-weight: 700; color: #52c41a; background-color: #f6ffed;">Current
+                                            User</span>
                                     <?php endif; ?>
                                 </div>
                             </td>
@@ -223,16 +205,12 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                 <?php endif; ?>
             </tbody>
         </table>
-        <!-- </div> -->
     </div>
 
     <!-- Bottom Pagination -->
     <div class="card-footer">
         <?php if ($totalPages > 1): ?>
             <div class="table-pagination-bottom">
-                <div class="pagination-info">
-                    Showing <?= ($page - 1) * $limit + 1 ?> to <?= min($page * $limit, $totalUsers) ?> of <?= $totalUsers ?> users
-                </div>
                 <div class="pagination-controls">
                     <?php if ($page > 1): ?>
                         <a href="?page=<?= $page - 1 ?>&limit=<?= $limit ?>" class="pagination-btn">
@@ -245,9 +223,8 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                     $endPage = min($totalPages, $page + 2);
 
                     for ($i = $startPage; $i <= $endPage; $i++):
-                    ?>
-                        <a href="?page=<?= $i ?>&limit=<?= $limit ?>"
-                            class="pagination-btn <?= $i == $page ? 'active' : '' ?>">
+                        ?>
+                        <a href="?page=<?= $i ?>&limit=<?= $limit ?>" class="pagination-btn <?= $i == $page ? 'active' : '' ?>">
                             <?= $i ?>
                         </a>
                     <?php endfor; ?>
@@ -257,15 +234,6 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                             Next <i class="fas fa-chevron-right"></i>
                         </a>
                     <?php endif; ?>
-                </div>
-                <div class="pagination-limit">
-                    <label>Show:</label>
-                    <select onchange="changeLimit(this.value)">
-                        <option value="10" <?= $limit == 10 ? 'selected' : '' ?>>10</option>
-                        <option value="25" <?= $limit == 25 ? 'selected' : '' ?>>25</option>
-                        <option value="50" <?= $limit == 50 ? 'selected' : '' ?>>50</option>
-                        <option value="100" <?= $limit == 100 ? 'selected' : '' ?>>100</option>
-                    </select>
                 </div>
             </div>
         <?php endif; ?>
@@ -304,7 +272,8 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                 </div>
                 <div class="form-group">
                     <label class="form-label">Reason for Suspension *</label>
-                    <textarea class="form-control form-textarea" name="reason" id="suspendReason" placeholder="Please provide a detailed reason for suspension..." required rows="4"></textarea>
+                    <textarea class="form-control form-textarea" name="reason" id="suspendReason"
+                        placeholder="Please provide a detailed reason for suspension..." required rows="4"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
@@ -340,7 +309,8 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                 </div>
                 <div class="form-group">
                     <label class="form-label">Type "DELETE" to confirm *</label>
-                    <input type="text" class="form-control" name="confirmation" placeholder="DELETE" required pattern="DELETE">
+                    <input type="text" class="form-control" name="confirmation" placeholder="DELETE" required
+                        pattern="DELETE">
                 </div>
             </div>
             <div class="modal-footer">
@@ -377,7 +347,8 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                 </div>
                 <div class="form-group">
                     <label class="form-label">Phone Number *</label>
-                    <input type="text" class="form-control" name="phone" placeholder="01XXXXXXXXX" required minlength="11" maxlength="11" pattern="01[0-9]{9}">
+                    <input type="text" class="form-control" name="phone" placeholder="01XXXXXXXXX" required
+                        minlength="11" maxlength="11" pattern="01[0-9]{9}">
                     <small class="form-text">Must be 11 digits starting with 01</small>
                 </div>
             </div>
@@ -403,14 +374,17 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
         </div>
         <div class="modal-body">
             <?php foreach ($userdata as $user): ?>
-                <div class="user-details-content" id="user-details-<?= htmlspecialchars($user['USER_ID'] ?? '') ?>" style="display: none;">
+                <div class="user-details-content" id="user-details-<?= htmlspecialchars($user['USER_ID'] ?? '') ?>"
+                    style="display: none;">
                     <div class="user-details-container">
                         <div class="user-profile-header">
                             <div class="user-avatar-large">
                                 <?php if (!empty($user['PROFILE_IMAGE'])): ?>
-                                    <img src="/uploads/profile/<?= htmlspecialchars($user['PROFILE_IMAGE']) ?>" alt="<?= htmlspecialchars($user['NAME'] ?? '') ?>">
+                                    <img src="/uploads/profile/<?= htmlspecialchars($user['PROFILE_IMAGE']) ?>"
+                                        alt="<?= htmlspecialchars($user['NAME'] ?? '') ?>">
                                 <?php else: ?>
-                                    <img src="https://ui-avatars.com/api/?name=<?= urlencode($user['NAME'] ?? '') ?>&background=4a6cf7&color=fff" alt="<?= htmlspecialchars($user['NAME'] ?? '') ?>">
+                                    <img src="https://ui-avatars.com/api/?name=<?= urlencode($user['NAME'] ?? '') ?>&background=4a6cf7&color=fff"
+                                        alt="<?= htmlspecialchars($user['NAME'] ?? '') ?>">
                                 <?php endif; ?>
                             </div>
                             <div class="user-profile-info">
@@ -423,11 +397,13 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                                     $statusClass = 'status-badge status-' . ($isSuspended ? 'suspended' : strtolower($user['STATUS'] ?? 'active'));
                                     ?>
                                     <span class="<?= $roleClass ?>">
-                                        <i class="fas <?= ($user['ROLE'] ?? '') === 'admin' ? 'fa-user-shield' : (($user['ROLE'] ?? '') === 'seller' ? 'fa-store' : 'fa-user') ?>"></i>
+                                        <i
+                                            class="fas <?= ($user['ROLE'] ?? '') === 'admin' ? 'fa-user-shield' : (($user['ROLE'] ?? '') === 'seller' ? 'fa-store' : 'fa-user') ?>"></i>
                                         <?= htmlspecialchars($user['ROLE'] ?? 'N/A') ?>
                                     </span>
                                     <span class="<?= $statusClass ?>">
-                                        <i class="fas <?= $isSuspended ? 'fa-ban' : (($user['STATUS'] ?? '') === 'active' ? 'fa-check-circle' : 'fa-clock') ?>"></i>
+                                        <i
+                                            class="fas <?= $isSuspended ? 'fa-ban' : (($user['STATUS'] ?? '') === 'active' ? 'fa-check-circle' : 'fa-clock') ?>"></i>
                                         <?= $isSuspended ? 'Suspended' : htmlspecialchars($user['STATUS'] ?? 'Active') ?>
                                     </span>
                                 </div>
@@ -447,7 +423,9 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                                 </div>
                                 <div class="detail-row">
                                     <div class="detail-label">Phone Number</div>
-                                    <div class="detail-value"><?= !empty($user['PHONE']) ? htmlspecialchars($user['PHONE']) : 'N/A' ?></div>
+                                    <div class="detail-value">
+                                        <?= !empty($user['PHONE']) ? htmlspecialchars($user['PHONE']) : 'N/A' ?>
+                                    </div>
                                 </div>
                                 <div class="detail-row">
                                     <div class="detail-label">User ID</div>
@@ -476,7 +454,8 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                                             <?= $isSuspended ? 'Suspended' : htmlspecialchars($user['STATUS'] ?? 'Active') ?>
                                         </span>
                                         <?php if (!empty($user['SUSPENSION_REASON'])): ?>
-                                            <div class="suspension-reason"><strong>Reason:</strong> <?= htmlspecialchars($user['SUSPENSION_REASON']) ?></div>
+                                            <div class="suspension-reason"><strong>Reason:</strong>
+                                                <?= htmlspecialchars($user['SUSPENSION_REASON']) ?></div>
                                         <?php endif; ?>
                                         <?php if (!empty($user['SUSPENDED_UNTIL'])): ?>
                                             <div class="suspension-until">
@@ -495,15 +474,21 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                                     <h3><i class="fas fa-store"></i> Seller Information</h3>
                                     <div class="detail-row">
                                         <div class="detail-label">Business Name</div>
-                                        <div class="detail-value"><?= !empty($user['BUSINESS_NAME']) ? htmlspecialchars($user['BUSINESS_NAME']) : 'N/A' ?></div>
+                                        <div class="detail-value">
+                                            <?= !empty($user['BUSINESS_NAME']) ? htmlspecialchars($user['BUSINESS_NAME']) : 'N/A' ?>
+                                        </div>
                                     </div>
                                     <div class="detail-row">
                                         <div class="detail-label">Business Address</div>
-                                        <div class="detail-value"><?= !empty($user['BUSINESS_ADDRESS']) ? htmlspecialchars($user['BUSINESS_ADDRESS']) : 'N/A' ?></div>
+                                        <div class="detail-value">
+                                            <?= !empty($user['BUSINESS_ADDRESS']) ? htmlspecialchars($user['BUSINESS_ADDRESS']) : 'N/A' ?>
+                                        </div>
                                     </div>
                                     <div class="detail-row">
                                         <div class="detail-label">Total Products</div>
-                                        <div class="detail-value"><?= !empty($user['TOTAL_PRODUCTS']) ? htmlspecialchars($user['TOTAL_PRODUCTS']) : '0' ?></div>
+                                        <div class="detail-value">
+                                            <?= !empty($user['TOTAL_PRODUCTS']) ? htmlspecialchars($user['TOTAL_PRODUCTS']) : '0' ?>
+                                        </div>
                                     </div>
                                     <div class="detail-row">
                                         <div class="detail-label">Seller Rating</div>
@@ -540,15 +525,21 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                                     <h3><i class="fas fa-shopping-cart"></i> Buyer Information</h3>
                                     <div class="detail-row">
                                         <div class="detail-label">Total Orders</div>
-                                        <div class="detail-value"><?= !empty($user['TOTAL_ORDERS']) ? htmlspecialchars($user['TOTAL_ORDERS']) : '0' ?></div>
+                                        <div class="detail-value">
+                                            <?= !empty($user['TOTAL_ORDERS']) ? htmlspecialchars($user['TOTAL_ORDERS']) : '0' ?>
+                                        </div>
                                     </div>
                                     <div class="detail-row">
                                         <div class="detail-label">Cancelled Orders</div>
-                                        <div class="detail-value"><?= !empty($user['CANCELLED_ORDERS']) ? htmlspecialchars($user['COMPLETED_ORDERS']) : '0' ?></div>
+                                        <div class="detail-value">
+                                            <?= !empty($user['CANCELLED_ORDERS']) ? htmlspecialchars($user['COMPLETED_ORDERS']) : '0' ?>
+                                        </div>
                                     </div>
                                     <div class="detail-row">
                                         <div class="detail-label">Completed Orders</div>
-                                        <div class="detail-value"><?= !empty($user['COMPLETED_ORDERS']) ? htmlspecialchars($user['COMPLETED_ORDERS']) : '0' ?></div>
+                                        <div class="detail-value">
+                                            <?= !empty($user['COMPLETED_ORDERS']) ? htmlspecialchars($user['COMPLETED_ORDERS']) : '0' ?>
+                                        </div>
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -601,7 +592,8 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="closeModal('liftSuspensionModal')">Cancel</button>
+                <button type="button" class="btn btn-secondary"
+                    onclick="closeModal('liftSuspensionModal')">Cancel</button>
                 <button type="submit" class="btn btn-success">
                     <i class="fas fa-unlock"></i> Lift Suspension
                 </button>

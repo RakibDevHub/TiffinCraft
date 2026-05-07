@@ -73,9 +73,9 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
 ?>
 
 <!-- Page Header -->
-<div class="page-header">
-    <h1 class="page-title">Reviews Management</h1>
-    <p class="page-subtitle">Manage customer reviews, moderate content, and track feedback across the platform</p>
+<div class="page-header dashboard-overview">
+    <h1 class="page-title" style="color: #fff;">Reviews Management</h1>
+    <p class="page-subtitle" style="color: #fff;">Manage customer reviews, moderate content, and track feedback across the platform</p>
 </div>
 
 <!-- Review Statistics Grid -->
@@ -229,23 +229,19 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
             </button>
         </div>
 
-        <div class="header-actions">
+        <div class="review header-actions">
             <div class="search-box">
-                <i class="fas fa-search"></i>
+                <i class="fas fa-search search-icon"></i>
                 <input type="text" id="reviewSearch" placeholder="Search reviews..." class="search-input">
             </div>
 
-            <div class="filter-dropdown">
+            <div class="filter-group">
                 <select id="statusFilter" class="filter-select">
                     <option value="">All Statuses</option>
                     <option value="PUBLIC">Public</option>
                     <option value="REPORTED">Reported</option>
                     <option value="HIDDEN">Hidden</option>
                 </select>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-
-            <div class="filter-dropdown">
                 <select id="ratingFilter" class="filter-select">
                     <option value="">All Ratings</option>
                     <option value="5">5 Stars</option>
@@ -254,7 +250,6 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                     <option value="2">2 Stars</option>
                     <option value="1">1 Star</option>
                 </select>
-                <i class="fas fa-chevron-down"></i>
             </div>
 
             <button class="btn btn-secondary" id="clearFiltersBtn">
@@ -632,7 +627,7 @@ function include_review_card($review, $csrfToken)
                         rows="3" placeholder="Enter reason for moderation action..."></textarea>
                 </div>
 
-                <div class="form-actions">
+                <div class="form-actions modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="closeModal('editReviewModal')">
                         Cancel
                     </button>
@@ -676,7 +671,7 @@ function include_review_card($review, $csrfToken)
                     </p>
                 </div>
 
-                <div class="form-actions" style="justify-content: center;">
+                <div class="form-actions" style="justify-content: center; gap: 0.5rem;">
                     <button type="button" class="btn btn-secondary" onclick="closeModal('deleteReviewModal')">
                         Cancel
                     </button>
@@ -690,47 +685,6 @@ function include_review_card($review, $csrfToken)
 </div>
 
 <style>
-    :root {
-        --primary: #4f46e5;
-        --primary-dark: #4338ca;
-        --primary-light: #6366f1;
-        --success: #10b981;
-        --warning: #f59e0b;
-        --danger: #ef4444;
-        --info: #3b82f6;
-        --gray-50: #f9fafb;
-        --gray-100: #f3f4f6;
-        --gray-200: #e5e7eb;
-        --gray-300: #d1d5db;
-        --gray-400: #9ca3af;
-        --gray-500: #6b7280;
-        --gray-600: #4b5563;
-        --gray-700: #374151;
-        --gray-800: #1f2937;
-        --gray-900: #111827;
-        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        --radius-sm: 0.375rem;
-        --radius-md: 0.5rem;
-        --radius-lg: 0.75rem;
-        --radius-xl: 1rem;
-    }
-
-    .page-title {
-        margin: 0 0 0.5rem 0;
-        font-size: 1.875rem;
-        font-weight: 700;
-        color: var(--gray-900);
-    }
-
-    .page-subtitle {
-        margin: 0;
-        font-size: 0.95rem;
-        color: var(--gray-500);
-    }
-
     /* Stats Grid */
     .stats-grid-wrapper {
         margin-bottom: 2rem;
@@ -740,22 +694,6 @@ function include_review_card($review, $csrfToken)
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 1.5rem;
-    }
-
-    .stat-card {
-        display: flex;
-        align-items: flex-start;
-        gap: 1rem;
-        padding: 1.5rem;
-        background: white;
-        border-radius: var(--radius-xl);
-        box-shadow: var(--shadow-md);
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .stat-card:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-lg);
     }
 
     .stat-icon-wrapper {
@@ -830,8 +768,6 @@ function include_review_card($review, $csrfToken)
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1.25rem 1.5rem;
-        border-bottom: 1px solid var(--gray-200);
         flex-wrap: wrap;
         gap: 1rem;
     }
@@ -852,10 +788,6 @@ function include_review_card($review, $csrfToken)
         font-size: 1.125rem;
         font-weight: 600;
         color: var(--gray-800);
-    }
-
-    .card-body {
-        padding: 1.5rem;
     }
 
     /* Rating Distribution */
@@ -938,8 +870,8 @@ function include_review_card($review, $csrfToken)
         padding: 0.5rem 1rem;
         background: transparent;
         border: 1px solid var(--gray-200);
-        border-radius: var(--radius-lg);
-        font-size: 0.875rem;
+        border-radius: 0.5rem;
+        font-size: 0.9rem;
         font-weight: 500;
         color: var(--gray-600);
         cursor: pointer;
@@ -947,7 +879,7 @@ function include_review_card($review, $csrfToken)
     }
 
     .tab-btn i {
-        font-size: 0.875rem;
+        font-size: 0.9rem;
     }
 
     .tab-btn .tab-count {
@@ -981,67 +913,6 @@ function include_review_card($review, $csrfToken)
         gap: 1rem;
         flex-wrap: wrap;
         width: 100%;
-    }
-
-    .search-box {
-        position: relative;
-        display: flex;
-        align-items: center;
-    }
-
-    .search-box i {
-        position: absolute;
-        left: 1rem;
-        color: var(--gray-400);
-        font-size: 0.875rem;
-    }
-
-    .search-box input {
-        padding: 0.625rem 1rem 0.625rem 2.5rem;
-        border: 1px solid var(--gray-300);
-        border-radius: var(--radius-lg);
-        font-size: 0.875rem;
-        min-width: 250px;
-        transition: all 0.2s;
-    }
-
-    .search-box input:focus {
-        outline: none;
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-    }
-
-    .filter-dropdown {
-        position: relative;
-        display: flex;
-        align-items: center;
-    }
-
-    .filter-select {
-        padding: 0.625rem 2rem 0.625rem 1rem;
-        border: 1px solid var(--gray-300);
-        border-radius: var(--radius-lg);
-        font-size: 0.875rem;
-        color: var(--gray-700);
-        background: white;
-        cursor: pointer;
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-    }
-
-    .filter-select:focus {
-        outline: none;
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-    }
-
-    .filter-dropdown i {
-        position: absolute;
-        right: 0.75rem;
-        color: var(--gray-400);
-        font-size: 0.75rem;
-        pointer-events: none;
     }
 
     /* Tab Panes */
@@ -1163,36 +1034,6 @@ function include_review_card($review, $csrfToken)
     .review-actions {
         display: flex;
         gap: 0.5rem;
-    }
-
-    .action-btn {
-        display: flex;
-        align-items: center;
-        gap: 0.375rem;
-        padding: 0.5rem 1rem;
-        background: transparent;
-        border: 1px solid var(--gray-300);
-        border-radius: var(--radius-lg);
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: var(--gray-600);
-        cursor: pointer;
-        transition: all 0.2s;
-    }
-
-    .action-btn:hover {
-        background: var(--gray-100);
-        border-color: var(--gray-400);
-    }
-
-    .action-btn.report-btn {
-        color: var(--warning);
-        border-color: rgba(245, 158, 11, 0.3);
-    }
-
-    .action-btn.report-btn:hover {
-        background: rgba(245, 158, 11, 0.1);
-        border-color: var(--warning);
     }
 
     /* Review Content */
@@ -1372,221 +1213,6 @@ function include_review_card($review, $csrfToken)
         justify-content: center;
     }
 
-    /* Modal Styles */
-    .modal-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(4px);
-        z-index: 9999;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .modal-overlay.active {
-        display: flex;
-        animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-
-        to {
-            opacity: 1;
-        }
-    }
-
-    .modal {
-        background: white;
-        border-radius: var(--radius-xl);
-        max-width: 500px;
-        width: 90%;
-        max-height: 90vh;
-        overflow-y: auto;
-        box-shadow: var(--shadow-xl);
-        animation: slideUp 0.3s ease;
-    }
-
-    @keyframes slideUp {
-        from {
-            transform: translateY(20px);
-            opacity: 0;
-        }
-
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
-
-    .modal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1.5rem;
-        border-bottom: 1px solid var(--gray-200);
-    }
-
-    .modal-title-wrapper {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-    }
-
-    .modal-title-wrapper i {
-        font-size: 1.5rem;
-    }
-
-    .modal-title {
-        margin: 0;
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--gray-800);
-    }
-
-    .modal-close {
-        background: none;
-        border: none;
-        font-size: 1.25rem;
-        color: var(--gray-400);
-        cursor: pointer;
-        padding: 0.5rem;
-        transition: all 0.2s;
-    }
-
-    .modal-close:hover {
-        color: var(--gray-600);
-        transform: rotate(90deg);
-    }
-
-    .modal-body {
-        padding: 1.5rem;
-    }
-
-    /* Form Styles */
-    .form-group {
-        margin-bottom: 1.25rem;
-    }
-
-    .form-label {
-        display: block;
-        margin-bottom: 0.5rem;
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: var(--gray-700);
-    }
-
-    .form-label .required {
-        color: var(--danger);
-    }
-
-    .form-select,
-    .form-textarea {
-        width: 100%;
-        padding: 0.625rem 0.875rem;
-        border: 1px solid var(--gray-300);
-        border-radius: var(--radius-lg);
-        font-size: 0.875rem;
-        color: var(--gray-700);
-        transition: all 0.2s;
-    }
-
-    .form-select {
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
-        background-position: right 0.5rem center;
-        background-repeat: no-repeat;
-        background-size: 1.5em 1.5em;
-        padding-right: 2.5rem;
-    }
-
-    .form-select:focus,
-    .form-textarea:focus {
-        outline: none;
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-    }
-
-    .form-textarea {
-        resize: vertical;
-        min-height: 100px;
-    }
-
-    .form-actions {
-        display: flex;
-        justify-content: flex-end;
-        gap: 0.75rem;
-        margin-top: 1.5rem;
-    }
-
-    /* Button Styles */
-    .btn {
-        padding: 0.625rem 1.25rem;
-        border: none;
-        border-radius: var(--radius-lg);
-        font-size: 0.875rem;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.2s;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-    }
-
-    .btn-sm {
-        padding: 0.375rem 0.875rem;
-        font-size: 0.8125rem;
-    }
-
-    .btn-primary {
-        background: var(--primary);
-        color: white;
-    }
-
-    .btn-primary:hover {
-        background: var(--primary-dark);
-        transform: translateY(-1px);
-        box-shadow: var(--shadow-md);
-    }
-
-    .btn-secondary {
-        background: var(--gray-200);
-        color: var(--gray-700);
-    }
-
-    .btn-secondary:hover {
-        background: var(--gray-300);
-    }
-
-    .btn-warning {
-        background: var(--warning);
-        color: white;
-    }
-
-    .btn-warning:hover {
-        background: #e07b0c;
-    }
-
-    .btn-outline {
-        background: transparent;
-        border: 1px solid var(--gray-300);
-        color: var(--gray-700);
-    }
-
-    .btn-outline:hover {
-        background: var(--gray-50);
-        border-color: var(--gray-400);
-    }
-
     /* Responsive */
     @media (max-width: 1280px) {
         .stats-grid {
@@ -1712,96 +1338,11 @@ function include_review_card($review, $csrfToken)
         color: var(--gray-700);
     }
 
-    /* Pagination styles */
-    .card-footer {
-        padding: 1.25rem 1.5rem;
-        border-top: 1px solid var(--gray-200);
-        background: var(--gray-50);
-    }
-
-    .pagination-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 1rem;
-    }
-
-    .pagination-info {
-        font-size: 0.875rem;
-        color: var(--gray-600);
-    }
-
-    .pagination-controls {
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-    }
-
-    .pagination-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.375rem;
-        padding: 0.5rem 0.875rem;
-        background: white;
-        border: 1px solid var(--gray-300);
-        border-radius: var(--radius-lg);
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: var(--gray-700);
-        text-decoration: none;
-        transition: all 0.2s;
-    }
-
-    .pagination-btn:hover {
-        background: var(--gray-100);
-        border-color: var(--gray-400);
-        color: var(--gray-800);
-    }
-
-    .pagination-btn.active {
-        background: var(--primary);
-        border-color: var(--primary);
-        color: white;
-    }
-
-    .pagination-limit {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.875rem;
-        color: var(--gray-600);
-    }
-
-    .pagination-limit select {
-        width: auto;
-        padding: 0.375rem 1.5rem 0.375rem 0.5rem;
-    }
-
     /* Reviewer email */
     .reviewer-email {
         margin: 0 0 0.25rem 0;
         font-size: 0.8125rem;
         color: var(--gray-500);
-    }
-
-    /* Action button variants */
-    .action-btn.view-btn:hover {
-        background: rgba(79, 70, 229, 0.1);
-        border-color: var(--primary);
-        color: var(--primary);
-    }
-
-    .action-btn.edit-btn:hover {
-        background: rgba(16, 185, 129, 0.1);
-        border-color: var(--success);
-        color: var(--success);
-    }
-
-    .action-btn.delete-btn:hover {
-        background: rgba(239, 68, 68, 0.1);
-        border-color: var(--danger);
-        color: var(--danger);
     }
 
     /* Responsive adjustments */

@@ -72,7 +72,7 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
 <div class="stats-grid-wrapper">
     <div class="stats-grid">
         <!-- Current Items Card -->
-        <div class="stat-card">
+        <div class="stat-card" style="flex-direction: row-reverse;">
             <div class="stat-icon-wrapper" style="background: rgba(79, 70, 229, 0.1); color: #4f46e5;">
                 <i class="fas fa-utensils"></i>
             </div>
@@ -88,7 +88,7 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
         </div>
 
         <!-- Plan Limit Card -->
-        <div class="stat-card">
+        <div class="stat-card" style="flex-direction: row-reverse;">
             <div class="stat-icon-wrapper" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">
                 <i class="fas fa-chart-line"></i>
             </div>
@@ -104,7 +104,7 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
         </div>
 
         <!-- Can Add Card -->
-        <div class="stat-card">
+        <div class="stat-card" style="flex-direction: row-reverse;">
             <div class="stat-icon-wrapper" style="background: <?= $canAddMore ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)' ?>; 
                 color: <?= $canAddMore ? '#10b981' : '#ef4444' ?>;">
                 <i class="fas <?= $canAddMore ? 'fa-plus-circle' : 'fa-ban' ?>"></i>
@@ -127,7 +127,7 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
         </div>
 
         <!-- Stock Overview Card -->
-        <div class="stat-card">
+        <div class="stat-card" style="flex-direction: row-reverse;">
             <div class="stat-icon-wrapper" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
                 <i class="fas fa-boxes"></i>
             </div>
@@ -563,7 +563,7 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                 </div>
             </form>
         </div>
-    </div>
+    </div> 
 </div>
 
 <?php
@@ -619,10 +619,10 @@ function menu_item_card($item, $csrfToken)
 
             <?php if ($item['DESCRIPTION']): ?>
                 <p class="menu-item-description">
-                    <!-- <?= strlen($item['DESCRIPTION']) > 100
+                    <?= strlen($item['DESCRIPTION']) > 100
                                 ? htmlspecialchars(substr($item['DESCRIPTION'], 0, 97) . '...')
-                                : htmlspecialchars($item['DESCRIPTION']) ?> -->
-                    <?= htmlspecialchars($item['DESCRIPTION']) ?>
+                                : htmlspecialchars($item['DESCRIPTION']) ?>
+                    <!-- <?= htmlspecialchars($item['DESCRIPTION']) ?> -->
                 </p>
             <?php endif; ?>
 

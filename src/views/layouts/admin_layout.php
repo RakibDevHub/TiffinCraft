@@ -28,6 +28,7 @@ $csrfToken = $_SESSION['csrf_token'] ?? '';
 	<script>
 		document.documentElement.classList.replace('no-js', 'js');
 	</script>
+	<script src="/assets/js/style.js"></script>
 
 	<?php if ($page === 'users'): ?>
 		<script src="/assets/js/admin_users.js"></script>
@@ -76,7 +77,7 @@ $csrfToken = $_SESSION['csrf_token'] ?? '';
 		</div>
 	</div>
 
-	<div class="sidebar" id="sidebar">
+	<div class="sidebar minimized" id="sidebar">
 		<ul>
 			<li class="<?= ($page == 'dashboard') ? 'active' : '' ?>">
 				<a href="/admin/dashboard"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>

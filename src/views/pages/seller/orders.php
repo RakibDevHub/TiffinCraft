@@ -188,7 +188,7 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
 
         <div class="header-actions">
             <!-- Filters and Search -->
-            <div class="filters-container">
+            <!-- <div class="filters-container"> -->
                 <div class="search-box">
                     <i class="fas fa-search search-icon"></i>
                     <input type="text" class="search-input" placeholder="Search by order, customer, items, or address..." id="orderSearch">
@@ -230,7 +230,7 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                         <i class="fas fa-times"></i> Clear
                     </button>
                 </div>
-            </div>
+            <!-- </div> -->
         </div>
     </div>
 

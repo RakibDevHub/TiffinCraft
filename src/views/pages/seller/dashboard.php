@@ -70,7 +70,7 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
             <h1 class="page-title" style="color: #fff;"><?= htmlspecialchars(ucfirst($title)) ?></h1>
             <p class="page-subtitle" style="color: #fff;">Welcome back, <?= htmlspecialchars($user['NAME']) ?>! Here's your business overview.</p>
         </div>
-        <div class="header-actions">
+        <div class="header-actions" style="width: fit-content;">
             <span class="" id="currentTime"><?= date('l, F j, Y g:i A') ?></span>
             <span class="current-balance">Balance: ৳<?= number_format($balance['CURRENT_BALANCE'] ?? 0, 2) ?></span>
         </div>
@@ -133,8 +133,8 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
 
 <!-- Dashboard Stats -->
 <div class="stats-grid">
-    <div class="dashboard-card stat-card">
-        <div class="card-header">
+    <div class="dashboard-card stat-card" style="gap: 0;">
+        <div class="card-header" style="border: none;">
             <div class="card-title">
                 <p>Total Orders</p>
                 <h1><?= number_format($totalOrders) ?></h1>
@@ -142,14 +142,14 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
             </div>
             <div class="card-icon blue"><i class="fas fa-shopping-bag"></i></div>
         </div>
-        <div class="card-body stat-trend">
+        <div class="card-body stat-trend" style="padding-top: 0.5rem;">
             <i class="fas fa-arrow-up"></i>
             <span><?= number_format($todayOrders) ?> today</span>
         </div>
     </div>
 
-    <div class="dashboard-card stat-card">
-        <div class="card-header">
+    <div class="dashboard-card stat-card" style="gap: 0;">
+        <div class="card-header" style="border: none;">
             <div class="card-title">
                 <p>Pending Orders</p>
                 <h1><?= number_format($orderStats['pending']['count'] ?? 0) ?></h1>
@@ -157,14 +157,14 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
             </div>
             <div class="card-icon orange"><i class="fas fa-clock"></i></div>
         </div>
-        <div class="card-body stat-trend">
+        <div class="card-body stat-trend" style="padding-top: 0.5rem;">
             <i class="fas fa-list"></i>
             <span>Needs attention</span>
         </div>
     </div>
 
-    <div class="dashboard-card stat-card">
-        <div class="card-header">
+    <div class="dashboard-card stat-card" style="gap: 0;">
+        <div class="card-header" style="border: none;">
             <div class="card-title">
                 <p>Completed Orders</p>
                 <h1><?= number_format($orderStats['delivered']['count'] ?? 0) ?></h1>
@@ -172,7 +172,7 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
             </div>
             <div class="card-icon green"><i class="fas fa-check-circle"></i></div>
         </div>
-        <div class="card-body stat-trend">
+        <div class="card-body stat-trend" style="padding-top: 0.5rem;">
             <i class="fas fa-chart-line"></i>
             <span>৳<?= number_format($orderStats['delivered']['revenue'] ?? 0, 2) ?> gross</span>
         </div>

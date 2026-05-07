@@ -36,6 +36,7 @@ $isBusinessView = strpos($_SERVER['REQUEST_URI'], '/business') === 0;
     <script>
         document.documentElement.classList.replace('no-js', 'js');
     </script>
+    <script src="/assets/js/style.js"></script>
 </head>
 
 <body>
@@ -53,7 +54,7 @@ $isBusinessView = strpos($_SERVER['REQUEST_URI'], '/business') === 0;
     ?>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             // Flash message auto-hide
             document.querySelectorAll(".flash-message").forEach((message) => {
                 setTimeout(() => {

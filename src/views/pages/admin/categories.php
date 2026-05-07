@@ -10,9 +10,10 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
 
 
 <!-- Page Header  -->
-<div class="page-header">
-    <h1 class="page-title"><?= htmlspecialchars(ucfirst($title)) ?></h1>
-    <p class="page-subtitle">Manage food categories, edit details, and track menu item associations</p>
+<div class="page-header dashboard-overview">
+    <h1 class="page-title" style="color: #fff;"><?= htmlspecialchars(ucfirst($title)) ?></h1>
+    <p class="page-subtitle" style="color: #fff;">Manage food categories, edit details, and track menu item associations
+    </p>
 </div>
 
 <!-- Filters and Search -->
@@ -35,37 +36,12 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
 <!-- Categories Table -->
 <div class="dashboard-card">
     <!-- Top Pagination -->
-    <div class="card-header">
+    <div class="card-header pagination-header">
         <div class="pagination-info">
-            Showing <?= ($page - 1) * $limit + 1 ?> to <?= min($page * $limit, $totalCategories) ?> of <?= $totalCategories ?> categories
+            Showing <?= ($page - 1) * $limit + 1 ?> to <?= min($page * $limit, $totalCategories) ?> of
+            <?= $totalCategories ?> categories
         </div>
-        <?php if ($totalPages > 1): ?>
-            <div class="pagination-controls">
-                <?php if ($page > 1): ?>
-                    <a href="?page=<?= $page - 1 ?>&limit=<?= $limit ?>" class="pagination-btn">
-                        <i class="fas fa-chevron-left"></i> Previous
-                    </a>
-                <?php endif; ?>
 
-                <?php
-                $startPage = max(1, $page - 2);
-                $endPage = min($totalPages, $page + 2);
-
-                for ($i = $startPage; $i <= $endPage; $i++):
-                ?>
-                    <a href="?page=<?= $i ?>&limit=<?= $limit ?>"
-                        class="pagination-btn <?= $i == $page ? 'active' : '' ?>">
-                        <?= $i ?>
-                    </a>
-                <?php endfor; ?>
-
-                <?php if ($page < $totalPages): ?>
-                    <a href="?page=<?= $page + 1 ?>&limit=<?= $limit ?>" class="pagination-btn">
-                        Next <i class="fas fa-chevron-right"></i>
-                    </a>
-                <?php endif; ?>
-            </div>
-        <?php endif; ?>
         <div class="pagination-limit">
             <label>Show:</label>
             <select onchange="changeLimit(this.value)">
@@ -102,9 +78,11 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                                 <td>
                                     <div class="user-info">
                                         <?php if (!empty($category['IMAGE'])): ?>
-                                            <img src="/uploads/categories/<?= htmlspecialchars($category['IMAGE']) ?>" class="user-avatar" alt="<?= htmlspecialchars($category['NAME'] ?? '') ?>">
+                                            <img src="/uploads/categories/<?= htmlspecialchars($category['IMAGE']) ?>"
+                                                class="user-avatar" alt="<?= htmlspecialchars($category['NAME'] ?? '') ?>">
                                         <?php else: ?>
-                                            <img src="https://ui-avatars.com/api/?name=<?= urlencode($category['NAME'] ?? '') ?>&background=4a6cf7&color=fff" class="user-avatar" alt="<?= htmlspecialchars($category['NAME'] ?? '') ?>">
+                                            <img src="https://ui-avatars.com/api/?name=<?= urlencode($category['NAME'] ?? '') ?>&background=4a6cf7&color=fff"
+                                                class="user-avatar" alt="<?= htmlspecialchars($category['NAME'] ?? '') ?>">
                                         <?php endif; ?>
                                         <div class="user-details">
                                             <h4><?= htmlspecialchars($category['NAME'] ?? '') ?></h4>
@@ -119,29 +97,26 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                                 <td>
                                     <div class="performance-metrics">
                                         <div class="metric">
-                                            <span class="metric-value"><?= htmlspecialchars($category['TOTAL_ITEMS'] ?? '0') ?></span>
+                                            <span
+                                                class="metric-value"><?= htmlspecialchars($category['TOTAL_ITEMS'] ?? '0') ?></span>
                                             <span class="metric-label">Total Items</span>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="action-buttons">
-                                        <button class="btn-action btn-edit"
-                                            onclick="openEditCategoryModal(
+                                        <button class="btn-action btn-edit" onclick="openEditCategoryModal(
                                                 '<?= $category['CATEGORY_ID'] ?>',
                                                 '<?= htmlspecialchars(addslashes($category['NAME'])) ?>',
                                                 '<?= !empty($category['DESCRIPTION']) ? htmlspecialchars(addslashes($category['DESCRIPTION'])) : '' ?>',
                                                 '<?= !empty($category['IMAGE']) ? htmlspecialchars($category['IMAGE']) : '' ?>'
-                                            )"
-                                            title="Edit Category">
+                                            )" title="Edit Category">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button class="btn-action btn-delete"
-                                            onclick="openDeleteCategoryModal(
+                                        <button class="btn-action btn-delete" onclick="openDeleteCategoryModal(
                                                 '<?= $category['CATEGORY_ID'] ?>',
                                                 '<?= htmlspecialchars(addslashes($category['NAME'])) ?>'
-                                            )"
-                                            title="Delete Category">
+                                            )" title="Delete Category">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </div>
@@ -158,9 +133,6 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
     <div class="card-footer">
         <?php if ($totalPages > 1): ?>
             <div class="table-pagination-bottom">
-                <div class="pagination-info">
-                    Showing <?= ($page - 1) * $limit + 1 ?> to <?= min($page * $limit, $totalCategories) ?> of <?= $totalCategories ?> categories
-                </div>
                 <div class="pagination-controls">
                     <?php if ($page > 1): ?>
                         <a href="?page=<?= $page - 1 ?>&limit=<?= $limit ?>" class="pagination-btn">
@@ -173,9 +145,8 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                     $endPage = min($totalPages, $page + 2);
 
                     for ($i = $startPage; $i <= $endPage; $i++):
-                    ?>
-                        <a href="?page=<?= $i ?>&limit=<?= $limit ?>"
-                            class="pagination-btn <?= $i == $page ? 'active' : '' ?>">
+                        ?>
+                        <a href="?page=<?= $i ?>&limit=<?= $limit ?>" class="pagination-btn <?= $i == $page ? 'active' : '' ?>">
                             <?= $i ?>
                         </a>
                     <?php endfor; ?>
@@ -185,15 +156,6 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                             Next <i class="fas fa-chevron-right"></i>
                         </a>
                     <?php endif; ?>
-                </div>
-                <div class="pagination-limit">
-                    <label>Show:</label>
-                    <select onchange="changeLimit(this.value)">
-                        <option value="10" <?= $limit == 10 ? 'selected' : '' ?>>10</option>
-                        <option value="25" <?= $limit == 25 ? 'selected' : '' ?>>25</option>
-                        <option value="50" <?= $limit == 50 ? 'selected' : '' ?>>50</option>
-                        <option value="100" <?= $limit == 100 ? 'selected' : '' ?>>100</option>
-                    </select>
                 </div>
             </div>
         <?php endif; ?>
@@ -220,23 +182,22 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                 </div>
                 <div class="form-group">
                     <label class="form-label">Description</label>
-                    <textarea class="form-control" name="description" rows="3" placeholder="Enter category description..."></textarea>
+                    <textarea class="form-control" name="description" rows="3"></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Category Image</label>
 
-                    <!-- Preview for Add -->
-                    <div id="imagePreview" class="preview-container" style="margin-top: 10px;"></div>
-
-
-                    <input type="file" id="imageUpload" name="image" accept="image/*" class="hidden">
-                    <label for="imageUpload" class="file-upload-label">
-                        <i class="fas fa-upload"></i> Choose Image
-                    </label>
+                    <div class="image-input-group" style="display: flex; gap: 10px; align-items: center;">
+                        <input type="file" id="imageUpload" name="image" accept="image/*" style="display: none;">
+                        <button type="button" class="btn btn-secondary"
+                            onclick="document.getElementById('imageUpload').click()">
+                            <i class="fas fa-upload"></i> Choose Image
+                        </button>
+                    </div>
 
                     <small class="form-text">Recommended size: 300x300 pixels</small>
+                    <div id="imagePreview" class="preview-container" style="margin-top: 10px;"></div>
                 </div>
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" onclick="closeModal('addCategoryModal')">Cancel</button>
@@ -267,26 +228,30 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                 </div>
                 <div class="form-group">
                     <label class="form-label">Description</label>
-                    <textarea class="form-control" name="description" id="editCategoryDescription" rows="3" placeholder="Enter category description..."></textarea>
+                    <textarea class="form-control" name="description" id="editCategoryDescription" rows="3"></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Category Image</label>
-                    <!-- <input type="file" class="form-control" name="image" accept="image/*"> -->
-                    
-                    <input type="file" id="changeImage" name="image" accept="image/*" class="hidden">
-                    <label for="changeImage" class="file-upload-label">
-                        <i class="fas fa-upload"></i> Choose Image
-                    </label>
 
-                    <small class="form-text">Leave empty to keep current image</small>
-                    <div id="currentImageContainer" class="current-image-container" style="margin-top: 10px;"></div>
+                    <div class="image-input-group" style="display: flex; gap: 10px; align-items: center;">
+                        <input type="file" id="changeImage" name="image" accept="image/*" style="display: none;">
+                        <button type="button" class="btn btn-secondary"
+                            onclick="document.getElementById('changeImage').click()">
+                            <i class="fas fa-upload"></i> Choose New Image
+                        </button>
+                    </div>
 
-                    <div id="editImagePreview" class="preview-container" style="margin-top: 10px;"></div>
+                    <small class="form-text">Leave empty to keep current image. Select new image to replace.</small>
 
+                    <div class="" style="display: flex; flex-direction: row; align-items: center; gap: 2rem;">
+                        <div id="currentImageContainer" class="current-image-container" style="margin-top: 15px;"></div>
+                        <div id="editImagePreview" class="preview-container" style="margin-top: 10px;"></div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="closeModal('editCategoryModal')">Cancel</button>
+                <button type="button" class="btn btn-secondary"
+                    onclick="closeModal('editCategoryModal')">Cancel</button>
                 <button type="submit" class="btn btn-primary">Update Category</button>
             </div>
         </form>
@@ -312,11 +277,13 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                     <i class="fas fa-exclamation-triangle"></i>
                     <h3>Confirm Deletion</h3>
                     <p>Are you sure you want to delete the category: <strong id="deleteCategoryName"></strong>?</p>
-                    <p>This action cannot be undone. Any menu items associated with this category will have this category removed.</p>
+                    <p>This action cannot be undone. Any menu items associated with this category will have this
+                        category removed.</p>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="closeModal('deleteCategoryModal')">Cancel</button>
+                <button type="button" class="btn btn-secondary"
+                    onclick="closeModal('deleteCategoryModal')">Cancel</button>
                 <button type="submit" class="btn btn-danger">
                     <i class="fas fa-trash"></i> Delete Category
                 </button>

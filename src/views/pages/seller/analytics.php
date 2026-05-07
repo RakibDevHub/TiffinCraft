@@ -143,50 +143,50 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
 
 <!-- Overview Stats -->
 <div class="stats-grid">
-    <div class="dashboard-card stat-card">
-        <div class="card-header">
+    <div class="dashboard-card stat-card" style="gap: 0;">
+        <div class="card-header" style="border: none;">
             <div class="card-title">
                 <p>Total Orders</p>
                 <h1><?= formatNumber($salesOverview['TOTAL_ORDERS']) ?></h1>
             </div>
             <div class="card-icon blue"><i class="fas fa-shopping-bag"></i></div>
         </div>
-        <div class="card-body stat-trend">
+        <div class="card-body stat-trend" style="padding-top: 0.5rem;">
             <i class="fas fa-check-circle text-success"></i>
             <span><?= formatNumber($salesOverview['COMPLETED_ORDERS']) ?> completed</span>
         </div>
     </div>
 
-    <div class="dashboard-card stat-card">
-        <div class="card-header">
+    <div class="dashboard-card stat-card" style="gap: 0;">
+        <div class="card-header" style="border: none;">
             <div class="card-title">
                 <p>Total Revenue</p>
                 <h1><?= formatPrice($salesOverview['TOTAL_REVENUE']) ?></h1>
             </div>
             <div class="card-icon green"><i class="fas fa-money-bill-wave"></i></div>
         </div>
-        <div class="card-body stat-trend">
+        <div class="card-body stat-trend" style="padding-top: 0.5rem;">
             <i class="fas fa-chart-line text-info"></i>
             <span>Avg: <?= formatPrice($salesOverview['AVG_ORDER_VALUE']) ?></span>
         </div>
     </div>
 
-    <div class="dashboard-card stat-card">
-        <div class="card-header">
+    <div class="dashboard-card stat-card" style="gap: 0;">
+        <div class="card-header" style="border: none;">
             <div class="card-title">
                 <p>Avg Delivery Time</p>
                 <h1><?= formatDeliveryTime($salesOverview['AVG_DELIVERY_TIME']) ?></h1>
             </div>
             <div class="card-icon orange"><i class="fas fa-clock"></i></div>
         </div>
-        <div class="card-body stat-trend">
+        <div class="card-body stat-trend" style="padding-top: 0.5rem;">
             <i class="fas fa-bolt text-warning"></i>
             <span>Prep efficiency</span>
         </div>
     </div>
 
-    <div class="dashboard-card stat-card">
-        <div class="card-header">
+    <div class="dashboard-card stat-card" style="gap: 0;">
+        <div class="card-header" style="border: none;">
             <div class="card-title">
                 <p>Cancellation Rate</p>
                 <h1>
@@ -200,7 +200,7 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
             </div>
             <div class="card-icon red"><i class="fas fa-ban"></i></div>
         </div>
-        <div class="card-body stat-trend">
+        <div class="card-body stat-trend" style="padding-top: 0.5rem;">
             <i class="fas fa-exclamation-triangle text-danger"></i>
             <span><?= formatNumber($salesOverview['CANCELLED_ORDERS']) ?> cancelled</span>
         </div>

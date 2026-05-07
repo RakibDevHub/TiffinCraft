@@ -32,6 +32,9 @@ $isBusinessView = strpos($_SERVER['REQUEST_URI'], '/business') === 0;
 		document.documentElement.classList.replace('no-js', 'js');
 	</script>
 
+	<script src="/assets/js/style.js"></script>
+
+	
 	<?php if ($page === 'dashboard'): ?>
 		<script src="/assets/js/seller_dashboard.js"></script>
 	<?php elseif ($page === 'menu-items'): ?>
@@ -59,7 +62,8 @@ $isBusinessView = strpos($_SERVER['REQUEST_URI'], '/business') === 0;
 				</div>
 				<!-- Logo -->
 				<div class="logo">
-					<a href="<?= $isBusinessView ? '/business' : '/' ?>"><img src="/assets/images/logo.png" alt="TiffinCraft">
+					<a href="<?= $isBusinessView ? '/business' : '/' ?>"><img src="/assets/images/logo.png"
+							alt="TiffinCraft">
 						<?= $isBusinessView ? '<span class="logo-subtext">Business</span>' : '' ?>
 					</a>
 				</div>
@@ -100,10 +104,12 @@ $isBusinessView = strpos($_SERVER['REQUEST_URI'], '/business') === 0;
 					<a href="/business/dashboard/reviews"><i class="fas fa-star"></i> <span>Reviews</span></a>
 				</li>
 				<li class="<?= ($page == 'service-areas') ? 'active' : '' ?>">
-					<a href="/business/dashboard/service-areas"><i class="fas fa-map-marker-alt"></i> <span>Service Areas</span></a>
+					<a href="/business/dashboard/service-areas"><i class="fas fa-map-marker-alt"></i> <span>Service
+							Areas</span></a>
 				</li>
 				<li class="<?= ($page == 'subscriptions') ? 'active' : '' ?>">
-					<a href="/business/dashboard/subscriptions"><i class="fas fa-box-open"></i> <span>Subscriptions</span></a>
+					<a href="/business/dashboard/subscriptions"><i class="fas fa-box-open"></i>
+						<span>Subscriptions</span></a>
 				</li>
 				<li class="<?= ($page == 'withdrawals') ? 'active' : '' ?>">
 					<a href="/business/dashboard/withdrawals"><i class="fas fa-wallet"></i> <span>Withdrawals</span></a>
@@ -144,13 +150,13 @@ $isBusinessView = strpos($_SERVER['REQUEST_URI'], '/business') === 0;
 		}
 
 		// Close dropdown if clicked outside
-		window.onclick = function(event) {
+		window.onclick = function (event) {
 			if (!event.target.closest('.profile-btn')) {
 				document.getElementById("dropdownMenu").classList.remove("show");
 			}
 		}
 
-		document.addEventListener("DOMContentLoaded", function() {
+		document.addEventListener("DOMContentLoaded", function () {
 			// Flash message auto-hide
 			document.querySelectorAll(".flash-message").forEach((message) => {
 				setTimeout(() => {

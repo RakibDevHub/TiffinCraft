@@ -84,60 +84,6 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
     </div>
 </div>
 
-<!-- Add New Area -->
-<!-- <div class="dashboard-card">
-    <div class="card-header">
-        <h3>Add Service Area</h3>
-    </div>
-    <div class="card-body">
-        <form method="POST" id="addAreaForm">
-            <input type="hidden" name="action" value="add_area">
-            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
-
-            <div class="form-group">
-                <label class="form-label">Select Area</label>
-                <select class="form-control" name="area_id" id="areaSelect" required>
-                    <option value="">Choose an area...</option>
-                    <?php foreach ($availableAreas as $area): ?>
-                        <?php
-                        $isAdded = in_array($area['AREA_ID'], array_column($serviceAreas, 'AREA_ID'));
-                        ?>
-                        <option value="<?= $area['AREA_ID'] ?>"
-                            <?= $isAdded ? 'disabled style="color: #6c757d;"' : '' ?>
-                            data-city="<?= htmlspecialchars($area['CITY']) ?>">
-                            <?= htmlspecialchars($area['NAME']) ?>
-                            (<?= htmlspecialchars($area['CITY']) ?>)
-                            <?= $isAdded ? ' - Already added' : '' ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-                <small class="form-text">Select an area from your city to serve</small>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Delivery Fee (৳)</label>
-                <input type="number" class="form-control" name="delivery_fee"
-                    min="0" step="0.01" value="30" required>
-                <small class="form-text">Delivery charge for this area</small>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Minimum Order (৳)</label>
-                <input type="number" class="form-control" name="min_order"
-                    min="0" step="0.01" value="150" required>
-                <small class="form-text">Minimum order amount for delivery</small>
-            </div>
-
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-plus"></i> Add Service Area
-                </button>
-            </div>
-        </form>
-    </div>
-</div> -->
-
-
 <!-- Add Service Area Modal -->
 <div class="modal-overlay" id="addModal">
     <div class="modal">
@@ -295,7 +241,7 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
     </div>
 </div>
 
-<script>
+<!-- <script>
     function openModal(id) {
         document.getElementById(id).classList.add('active');
     }
@@ -339,4 +285,4 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
         });
 
     });
-</script>
+</script> -->

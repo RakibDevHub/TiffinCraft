@@ -1,3 +1,4 @@
+// Change items per page
 function changeLimit(newLimit) {
   const url = new URL(window.location.href);
   url.searchParams.set("limit", newLimit);
@@ -5,22 +6,34 @@ function changeLimit(newLimit) {
   window.location.href = url.toString();
 }
 
-// Modal functions
+// Open add category modal
 function openAddCategoryModal() {
   document.getElementById("addCategoryModal").classList.add("active");
 }
 
+// Open edit category modal and populate form
 function openEditCategoryModal(id, name, description, image) {
   document.getElementById("editCategoryId").value = id;
   document.getElementById("editCategoryName").value = name;
   document.getElementById("editCategoryDescription").value = description;
 
+  // Clear preview and file input
+  const editPreview = document.getElementById("editImagePreview");
+  if (editPreview) editPreview.innerHTML = "";
+
+  const changeImage = document.getElementById("changeImage");
+  if (changeImage) changeImage.value = "";
+
+  // Hide clear button
+  const clearBtn = document.getElementById("clearEditPreview");
+  if (clearBtn) clearBtn.style.display = "none";
+
+  // Show current image container
   const container = document.getElementById("currentImageContainer");
   if (image) {
     container.innerHTML = `
-      <p>Current Image:</p>
-      <img src="/uploads/categories/${image}" style="max-width: 100px; max-height: 100px; border-radius: 4px;">
-    `;
+            <img src="/uploads/categories/${image}" style="width: 150px; height: 100px; border-radius: 4px;">
+        `;
   } else {
     container.innerHTML = "<p>No current image</p>";
   }
@@ -28,16 +41,20 @@ function openEditCategoryModal(id, name, description, image) {
   document.getElementById("editCategoryModal").classList.add("active");
 }
 
+// Open delete category modal
 function openDeleteCategoryModal(id, name) {
   document.getElementById("deleteCategoryId").value = id;
   document.getElementById("deleteCategoryName").textContent = name;
   document.getElementById("deleteCategoryModal").classList.add("active");
 }
 
+// Close any modal
 function closeModal(modalId) {
-  document.getElementById(modalId).classList.remove("active");
+  const modal = document.getElementById(modalId);
+  if (modal) modal.classList.remove("active");
 }
 
+// Filter categories by search text
 function filterCategories() {
   const searchText = (
     document.getElementById("categorySearch")?.value || ""
@@ -47,40 +64,60 @@ function filterCategories() {
   rows.forEach((row) => {
     const categoryName =
       row.querySelector(".user-details h4")?.textContent.toLowerCase() || "";
-
     const searchMatch = !searchText || categoryName.includes(searchText);
-
     row.style.display = searchMatch ? "" : "none";
   });
 }
 
+// Clear all filters
 function clearFilters() {
   const search = document.getElementById("categorySearch");
-
   if (search) search.value = "";
-
   filterCategories();
 }
 
-function previewImage(input, previewId) {
+// Preview image before upload with remove button
+function previewImage(input, previewId, clearBtnId) {
   const preview = document.getElementById(previewId);
-  preview.innerHTML = ""; // Clear old preview
+  const clearBtn = document.getElementById(clearBtnId);
+
+  if (!preview) return;
+
+  preview.innerHTML = "";
 
   if (input.files && input.files[0]) {
     const reader = new FileReader();
     reader.onload = function (e) {
       preview.innerHTML = `
-        <img src="${e.target.result}" 
-             style="max-width: 100px; max-height: 100px; border-radius: 4px; border:1px solid #ddd;">
-      `;
+                <div style="position: relative; display: inline-block; margin-top: 10px;">
+                    <img src="${e.target.result}" style="width: 150px; height: 100px; border-radius: 4px; border: 1px solid #ddd;">
+                    <button type="button" class="remove-preview-btn" onclick="removePreview('${previewId}', '${clearBtnId}', '${input.id}')" 
+                        style="position: absolute; top: -8px; right: -8px; width: 20px; height: 20px; border-radius: 50%; background: #ef4444; color: white; border: none; cursor: pointer; font-size: 12px; display: flex; align-items: center; justify-content: center;">
+                        ×
+                    </button>
+                </div>
+            `;
+      if (clearBtn) clearBtn.style.display = "inline-block";
     };
     reader.readAsDataURL(input.files[0]);
+  } else {
+    if (clearBtn) clearBtn.style.display = "none";
   }
 }
 
-// Initialize
+// Remove preview image
+function removePreview(previewId, clearBtnId, inputId) {
+  const preview = document.getElementById(previewId);
+  const clearBtn = document.getElementById(clearBtnId);
+  const fileInput = document.getElementById(inputId);
+
+  if (preview) preview.innerHTML = "";
+  if (fileInput) fileInput.value = "";
+  if (clearBtn) clearBtn.style.display = "none";
+}
+
+// Initialize on page load
 document.addEventListener("DOMContentLoaded", function () {
-  // Event listeners
   const addCategoryBtn = document.getElementById("addCategoryBtn");
   if (addCategoryBtn)
     addCategoryBtn.addEventListener("click", openAddCategoryModal);
@@ -92,17 +129,19 @@ document.addEventListener("DOMContentLoaded", function () {
   if (categorySearch)
     categorySearch.addEventListener("input", filterCategories);
 
+  // Add image preview with remove
   const addImageInput = document.getElementById("imageUpload");
   if (addImageInput) {
     addImageInput.addEventListener("change", function () {
-      previewImage(this, "imagePreview");
+      previewImage(this, "imagePreview", "clearAddPreview");
     });
   }
 
-  const editImageInput = document.getElementById("editImageUpload");
+  // Edit image preview with remove
+  const editImageInput = document.getElementById("changeImage");
   if (editImageInput) {
     editImageInput.addEventListener("change", function () {
-      previewImage(this, "editImagePreview");
+      previewImage(this, "editImagePreview", "clearEditPreview");
     });
   }
 

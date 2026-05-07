@@ -9,9 +9,9 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
 ?>
 
 <!-- Page Header  -->
-<div class="page-header">
-    <h1 class="page-title"><?= htmlspecialchars(ucfirst($title)) ?></h1>
-    <p class="page-subtitle">Manage service areas, edit details, and track kitchen associations</p>
+<div class="page-header dashboard-overview">
+    <h1 class="page-title" style="color: #fff;"><?= htmlspecialchars(ucfirst($title)) ?></h1>
+    <p class="page-subtitle" style="color: #fff;">Manage service areas, edit details, and track kitchen associations</p>
 </div>
 
 <!-- Filters and Search -->
@@ -33,9 +33,9 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
             $cities = array_unique(array_column($areasData, 'CITY'));
             foreach ($cities as $city):
                 if (!empty($city)):
-            ?>
+                    ?>
                     <option value="<?= htmlspecialchars($city) ?>"><?= htmlspecialchars($city) ?></option>
-            <?php
+                    <?php
                 endif;
             endforeach; ?>
         </select>
@@ -54,37 +54,12 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
 <!-- Areas Table -->
 <div class="dashboard-card">
     <!-- Top Pagination -->
-    <div class="card-header">
+    <div class="card-header pagination-header">
         <div class="pagination-info">
-            Showing <?= ($page - 1) * $limit + 1 ?> to <?= min($page * $limit, $totalAreas) ?> of <?= $totalAreas ?> areas
+            Showing <?= ($page - 1) * $limit + 1 ?> to <?= min($page * $limit, $totalAreas) ?> of <?= $totalAreas ?>
+            areas
         </div>
-        <?php if ($totalPages > 1): ?>
-            <div class="pagination-controls">
-                <?php if ($page > 1): ?>
-                    <a href="?page=<?= $page - 1 ?>&limit=<?= $limit ?>" class="pagination-btn">
-                        <i class="fas fa-chevron-left"></i> Previous
-                    </a>
-                <?php endif; ?>
 
-                <?php
-                $startPage = max(1, $page - 2);
-                $endPage = min($totalPages, $page + 2);
-
-                for ($i = $startPage; $i <= $endPage; $i++):
-                ?>
-                    <a href="?page=<?= $i ?>&limit=<?= $limit ?>"
-                        class="pagination-btn <?= $i == $page ? 'active' : '' ?>">
-                        <?= $i ?>
-                    </a>
-                <?php endfor; ?>
-
-                <?php if ($page < $totalPages): ?>
-                    <a href="?page=<?= $page + 1 ?>&limit=<?= $limit ?>" class="pagination-btn">
-                        Next <i class="fas fa-chevron-right"></i>
-                    </a>
-                <?php endif; ?>
-            </div>
-        <?php endif; ?>
         <div class="pagination-limit">
             <label>Show:</label>
             <select onchange="changeLimit(this.value)">
@@ -140,35 +115,33 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                                 <td>
                                     <div class="performance-metrics">
                                         <div class="metric">
-                                            <span class="metric-value"><?= htmlspecialchars($area['TOTAL_KITCHENS'] ?? '0') ?></span>
+                                            <span
+                                                class="metric-value"><?= htmlspecialchars($area['TOTAL_KITCHENS'] ?? '0') ?></span>
                                             <span class="metric-label">Kitchens</span>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <span class="status-badge status-<?= strtolower($area['STATUS'] ?? 'active') ?>">
-                                        <i class="fas <?= ($area['STATUS'] ?? 'active') === 'active' ? 'fa-check-circle' : 'fa-times-circle' ?>"></i>
+                                        <i
+                                            class="fas <?= ($area['STATUS'] ?? 'active') === 'active' ? 'fa-check-circle' : 'fa-times-circle' ?>"></i>
                                         <?= htmlspecialchars($area['STATUS'] ?? 'Active') ?>
                                     </span>
                                 </td>
                                 <td>
                                     <div class="action-buttons">
-                                        <button class="btn-action btn-edit"
-                                            onclick="openEditAreaModal(
+                                        <button class="btn-action btn-edit" onclick="openEditAreaModal(
                                                 '<?= $area['AREA_ID'] ?>',
                                                 '<?= htmlspecialchars(addslashes($area['NAME'])) ?>',
                                                 '<?= htmlspecialchars(addslashes($area['CITY'] ?? 'Dhaka')) ?>',
                                                 '<?= $area['STATUS'] ?? 'active' ?>'
-                                            )"
-                                            title="Edit Area">
+                                            )" title="Edit Area">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button class="btn-action btn-delete"
-                                            onclick="openDeleteAreaModal(
+                                        <button class="btn-action btn-delete" onclick="openDeleteAreaModal(
                                                 '<?= $area['AREA_ID'] ?>',
                                                 '<?= htmlspecialchars(addslashes($area['NAME'])) ?>'
-                                            )"
-                                            title="Delete Area">
+                                            )" title="Delete Area">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </div>
@@ -185,9 +158,6 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
     <div class="card-footer">
         <?php if ($totalPages > 1): ?>
             <div class="table-pagination-bottom">
-                <div class="pagination-info">
-                    Showing <?= ($page - 1) * $limit + 1 ?> to <?= min($page * $limit, $totalAreas) ?> of <?= $totalAreas ?> areas
-                </div>
                 <div class="pagination-controls">
                     <?php if ($page > 1): ?>
                         <a href="?page=<?= $page - 1 ?>&limit=<?= $limit ?>" class="pagination-btn">
@@ -200,9 +170,8 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                     $endPage = min($totalPages, $page + 2);
 
                     for ($i = $startPage; $i <= $endPage; $i++):
-                    ?>
-                        <a href="?page=<?= $i ?>&limit=<?= $limit ?>"
-                            class="pagination-btn <?= $i == $page ? 'active' : '' ?>">
+                        ?>
+                        <a href="?page=<?= $i ?>&limit=<?= $limit ?>" class="pagination-btn <?= $i == $page ? 'active' : '' ?>">
                             <?= $i ?>
                         </a>
                     <?php endfor; ?>
@@ -212,15 +181,6 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                             Next <i class="fas fa-chevron-right"></i>
                         </a>
                     <?php endif; ?>
-                </div>
-                <div class="pagination-limit">
-                    <label>Show:</label>
-                    <select onchange="changeLimit(this.value)">
-                        <option value="10" <?= $limit == 10 ? 'selected' : '' ?>>10</option>
-                        <option value="25" <?= $limit == 25 ? 'selected' : '' ?>>25</option>
-                        <option value="50" <?= $limit == 50 ? 'selected' : '' ?>>50</option>
-                        <option value="100" <?= $limit == 100 ? 'selected' : '' ?>>100</option>
-                    </select>
                 </div>
             </div>
         <?php endif; ?>
@@ -323,7 +283,8 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                     <i class="fas fa-exclamation-triangle"></i>
                     <h3>Confirm Deletion</h3>
                     <p>Are you sure you want to delete the service area: <strong id="deleteAreaName"></strong>?</p>
-                    <p>This action cannot be undone. Any kitchens associated with this area will have this area removed from their service zones.</p>
+                    <p>This action cannot be undone. Any kitchens associated with this area will have this area removed
+                        from their service zones.</p>
                 </div>
             </div>
             <div class="modal-footer">

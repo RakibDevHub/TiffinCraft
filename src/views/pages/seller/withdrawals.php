@@ -11,7 +11,8 @@ function formatPrice($price)
 
 function formatDate($dateString, $format = 'M j, Y g:i A')
 {
-    if (!$dateString) return '';
+    if (!$dateString)
+        return '';
     $date = DateTime::createFromFormat('d-M-y h.i.s.u A', $dateString);
     return $date ? $date->format($format) : htmlspecialchars($dateString);
 }
@@ -64,129 +65,132 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
     <p class="page-subtitle">Manage your earnings and withdrawal requests</p>
 </div>
 
-<div class="dashboard-grid">
-    <!-- Balance Stats -->
-    <div class="stats-grid" style="margin-bottom: 30px;">
-        <div class="dashboard-card stat-card">
-            <div class="card-header">
-                <div class="card-title">
-                    <p>Available Balance</p>
-                    <h1><?= formatPrice($balanceInfo['CURRENT_BALANCE'] ?? 0) ?></h1>
-                </div>
-                <div class="card-icon blue"><i class="fas fa-money-bill-wave"></i></div>
+<!-- Balance Stats -->
+<div class="stats-grid" style="margin-bottom: 30px;">
+    <div class="dashboard-card stat-card">
+        <div class="card-header">
+            <div class="card-title">
+                <p>Available Balance</p>
+                <h1><?= formatPrice($balanceInfo['CURRENT_BALANCE'] ?? 0) ?></h1>
             </div>
-        </div>
-        <div class="dashboard-card stat-card">
-            <div class="card-header">
-                <div class="card-title">
-                    <p>Pending Balance</p>
-                    <h1><?= formatPrice($balanceInfo['PENDING_WITHDRAWALS'] ?? 0) ?></h1>
-                </div>
-                <div class="card-icon orange"><i class="fas fa-clock"></i></div>
-            </div>
-        </div>
-        <div class="dashboard-card stat-card">
-            <div class="card-header">
-                <div class="card-title">
-                    <p>Processed Withdrawals</p>
-                    <h1><?= count(array_filter($withdrawalHistory, function ($w) {
-                            return $w['STATUS'] === 'PROCESSED';
-                        })) ?></h1>
-                </div>
-                <div class="card-icon green"><i class="fas fa-check-circle"></i></div>
-            </div>
-        </div>
-        <div class="dashboard-card stat-card">
-            <div class="card-header">
-                <div class="card-title">
-                    <p>Total Withdrawn</p>
-                    <h1><?= formatPrice(array_sum(array_column(
-                            array_filter($withdrawalHistory, function ($w) {
-                                return $w['STATUS'] === 'PROCESSED';
-                            }),
-                            'AMOUNT'
-                        ))) ?></h1>
-                </div>
-                <div class="card-icon"><i class="fas fa-money-bill-wave"></i></div>
-            </div>
+            <div class="card-icon blue"><i class="fas fa-money-bill-wave"></i></div>
         </div>
     </div>
-
-    <!-- Withdrawal Request Section -->
-    <div class="dashboard-card" style="margin-bottom: 30px;">
+    <div class="dashboard-card stat-card">
         <div class="card-header">
-            <h3>Request Withdrawal</h3>
+            <div class="card-title">
+                <p>Pending Balance</p>
+                <h1><?= formatPrice($balanceInfo['PENDING_WITHDRAWALS'] ?? 0) ?></h1>
+            </div>
+            <div class="card-icon orange"><i class="fas fa-clock"></i></div>
         </div>
-        <div class="card-body">
-            <?php if (($balanceInfo['CURRENT_BALANCE'] ?? 0) >= 100 && !$hasPendingWithdrawals): ?>
-                <form method="POST" id="withdrawalRequestForm">
-                    <input type="hidden" name="action" value="request_withdrawal">
-                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
+    </div>
+    <div class="dashboard-card stat-card">
+        <div class="card-header">
+            <div class="card-title">
+                <p>Processed Withdrawals</p>
+                <h1><?= count(array_filter($withdrawalHistory, function ($w) {
+                    return $w['STATUS'] === 'PROCESSED';
+                })) ?></h1>
+            </div>
+            <div class="card-icon green"><i class="fas fa-check-circle"></i></div>
+        </div>
+    </div>
+    <div class="dashboard-card stat-card">
+        <div class="card-header">
+            <div class="card-title">
+                <p>Total Withdrawn</p>
+                <h1><?= formatPrice(array_sum(array_column(
+                    array_filter($withdrawalHistory, function ($w) {
+                        return $w['STATUS'] === 'PROCESSED';
+                    }),
+                    'AMOUNT'
+                ))) ?></h1>
+            </div>
+            <div class="card-icon"><i class="fas fa-money-bill-wave"></i></div>
+        </div>
+    </div>
+</div>
 
-                    <div class="form-row" style="margin-bottom: 0;">
-                        <div class="form-group">
-                            <label class="form-label">Available Balance</label>
-                            <div class="input-with-icon">
-                                <i class="fas fa-wallet"></i>
-                                <input type="text" class="form-control" value="<?= formatPrice($balanceInfo['CURRENT_BALANCE'] ?? 0) ?>" readonly>
-                            </div>
-                        </div>
+<!-- Withdrawal Request Section -->
+<div class="dashboard-card" style="margin-bottom: 30px;">
+    <div class="card-header">
+        <h3>Request Withdrawal</h3>
+    </div>
+    <div class="card-body">
+        <?php if (($balanceInfo['CURRENT_BALANCE'] ?? 0) >= 100 && !$hasPendingWithdrawals): ?>
+            <form method="POST" id="withdrawalRequestForm">
+                <input type="hidden" name="action" value="request_withdrawal">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
 
-                        <div class="form-group">
-                            <label class="form-label">Withdrawal Amount *</label>
-                            <div class="input-with-icon">
-                                <i class="fas fa-money-bill-wave"></i>
-                                <input type="number" class="form-control" name="amount" id="withdrawalAmount"
-                                    min="100" max="<?= $balanceInfo['CURRENT_BALANCE'] ?? 0 ?>" step="0.01"
-                                    placeholder="Enter amount to withdraw" required>
-                            </div>
-                            <small class="form-text">Minimum withdrawal amount: ৳100</small>
+                <div class="form-row" style="margin-bottom: 0;">
+                    <div class="form-group">
+                        <label class="form-label">Available Balance</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-wallet"></i>
+                            <input type="text" class="form-control"
+                                value="<?= formatPrice($balanceInfo['CURRENT_BALANCE'] ?? 0) ?>" readonly>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Withdrawal Method *</label>
-                        <select class="form-control" name="method" id="withdrawalMethod" required>
-                            <option value="">Select Payment Method</option>
-                            <option value="Bank Transfer">Bank Transfer</option>
-                            <option value="bKash Agent">bKash Agent</option>
-                            <option value="bKash Personal">bKash Personal</option>
-                            <option value="Nagad Agent">Nagad Agent</option>
-                            <option value="Nagad Personal">Nagad Personal</option>
-                            <option value="Rocket Agent">Rocket Agent</option>
-                            <option value="Rocket Personal">Rocket Personal</option>
-                        </select>
+                        <label class="form-label">Withdrawal Amount *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <input type="number" class="form-control" name="amount" id="withdrawalAmount" min="100"
+                                max="<?= $balanceInfo['CURRENT_BALANCE'] ?? 0 ?>" step="0.01"
+                                placeholder="Enter amount to withdraw" required>
+                        </div>
+                        <small class="form-text">Minimum withdrawal amount: ৳100</small>
                     </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Account Details *</label>
-                        <textarea class="form-control" name="account_details" placeholder="Enter your account details (account number, bank name, branch, etc.)" rows="3" required></textarea>
-                        <small class="form-text">
-                            For Bank Transfer: Include bank name, account holder name, account number, routing number, branch name<br>
-                            For Mobile Banking: Include phone number, account type
-                        </small>
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary" id="submitWithdrawal">
-                            <i class="fas fa-paper-plane"></i> Request Withdrawal
-                        </button>
-                    </div>
-                </form>
-            <?php elseif ($hasPendingWithdrawals): ?>
-                <div class="no-data">
-                    <i class="fas fa-clock"></i>
-                    <p>Pending Withdrawal Exists</p>
-                    <p class="text-muted" style="text-align: start; margin-top: 1rem;">You already have pending withdrawals. Please wait for them to be processed before making new requests.</p>
                 </div>
-            <?php else: ?>
-                <div class="no-data">
-                    <i class="fas fa-wallet"></i>
-                    <p>Insufficient Balance</p>
-                    <p class="text-muted">You need at least ৳100 available balance to make a withdrawal request.</p>
+
+                <div class="form-group">
+                    <label class="form-label">Withdrawal Method *</label>
+                    <select class="form-control" name="method" id="withdrawalMethod" required>
+                        <option value="">Select Payment Method</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                        <option value="bKash Agent">bKash Agent</option>
+                        <option value="bKash Personal">bKash Personal</option>
+                        <option value="Nagad Agent">Nagad Agent</option>
+                        <option value="Nagad Personal">Nagad Personal</option>
+                        <option value="Rocket Agent">Rocket Agent</option>
+                        <option value="Rocket Personal">Rocket Personal</option>
+                    </select>
                 </div>
-            <?php endif; ?>
-        </div>
+
+                <div class="form-group">
+                    <label class="form-label">Account Details *</label>
+                    <textarea class="form-control" name="account_details"
+                        placeholder="Enter your account details (account number, bank name, branch, etc.)" rows="3"
+                        required></textarea>
+                    <small class="form-text">
+                        For Bank Transfer: Include bank name, account holder name, account number, routing number, branch
+                        name<br>
+                        For Mobile Banking: Include phone number, account type
+                    </small>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" id="submitWithdrawal">
+                        <i class="fas fa-paper-plane"></i> Request Withdrawal
+                    </button>
+                </div>
+            </form>
+        <?php elseif ($hasPendingWithdrawals): ?>
+            <div class="no-data">
+                <i class="fas fa-clock"></i>
+                <p>Pending Withdrawal Exists</p>
+                <p class="text-muted" style="text-align: start; margin-top: 1rem;">You already have pending withdrawals.
+                    Please wait for them to be processed before making new requests.</p>
+            </div>
+        <?php else: ?>
+            <div class="no-data">
+                <i class="fas fa-wallet"></i>
+                <p>Insufficient Balance</p>
+                <p class="text-muted">You need at least ৳100 available balance to make a withdrawal request.</p>
+            </div>
+        <?php endif; ?>
     </div>
 </div>
 
@@ -194,45 +198,46 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
 <div class="dashboard-card">
     <div class="card-header" style="margin: 0;">
         <h3>Withdrawal History</h3>
-    </div>
-    <!-- Filters and Search -->
-    <div class="filters-container">
-        <div class="search-box">
-            <i class="fas fa-search search-icon"></i>
-            <input type="text" class="search-input" placeholder="Search by withdrawal ID or method..." id="withdrawalSearch">
-        </div>
 
-        <div class="filter-group">
-            <select class="filter-select" id="statusFilter">
-                <option value="">All Statuses</option>
-                <option value="PENDING">Pending</option>
-                <option value="APPROVED">Approved</option>
-                <option value="PROCESSED">Processed</option>
-                <option value="REJECTED">Rejected</option>
-            </select>
+        <!-- Filters and Search -->
+        <div class="header-actions">
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search by withdrawal ID or method..."
+                    id="withdrawalSearch">
+            </div>
 
-            <select class="filter-select" id="dateRangeFilter">
-                <option value="all">All Time</option>
-                <option value="today">Today</option>
-                <option value="yesterday">Yesterday</option>
-                <option value="week">This Week</option>
-                <option value="month">This Month</option>
-                <option value="custom">Custom Range</option>
-            </select>
+            <div class="filter-group">
+                <select class="filter-select" id="statusFilter">
+                    <option value="">All Statuses</option>
+                    <option value="PENDING">Pending</option>
+                    <option value="APPROVED">Approved</option>
+                    <option value="PROCESSED">Processed</option>
+                    <option value="REJECTED">Rejected</option>
+                </select>
 
-            <div class="custom-date-range" id="customDateRange" style="display: none;">
-                <input type="date" class="filter-select" id="dateFrom" placeholder="From Date">
-                <input type="date" class="filter-select" id="dateTo" placeholder="To Date">
+                <select class="filter-select" id="dateRangeFilter">
+                    <option value="all">All Time</option>
+                    <option value="today">Today</option>
+                    <option value="yesterday">Yesterday</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                    <option value="custom">Custom Range</option>
+                </select>
+
+                <div class="custom-date-range" id="customDateRange" style="display: none;">
+                    <input type="date" class="filter-select" id="dateFrom" placeholder="From Date">
+                    <input type="date" class="filter-select" id="dateTo" placeholder="To Date">
+                </div>
+            </div>
+
+            <div class="action-buttons-group">
+                <button class="btn btn-secondary" id="clearFilters">
+                    <i class="fas fa-times"></i> Clear
+                </button>
             </div>
         </div>
-
-        <div class="action-buttons-group">
-            <button class="btn btn-secondary" id="clearFilters">
-                <i class="fas fa-times"></i> Clear
-            </button>
-        </div>
     </div>
-
 
     <div class="card-body">
         <?php if (empty($withdrawalHistory)): ?>
@@ -275,8 +280,7 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                             }
                             ?>
                             <tr data-status="<?= strtolower($withdrawal['STATUS']) ?>"
-                                data-request-date="<?= $requestDateOnly ?>"
-                                data-processed-date="<?= $processedDateOnly ?>">
+                                data-request-date="<?= $requestDateOnly ?>" data-processed-date="<?= $processedDateOnly ?>">
                                 <td>
                                     <div class="transaction-info">
                                         <strong><?= 'WD-' . str_pad($withdrawal['WITHDRAW_ID'], 6, '0', STR_PAD_LEFT) ?></strong>
@@ -289,7 +293,8 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                                 </td>
                                 <td>
                                     <div class="payment-method">
-                                        <span class="method-badge method-<?= strtolower(str_replace(' ', '-', $withdrawal['METHOD'])) ?>">
+                                        <span
+                                            class="method-badge method-<?= strtolower(str_replace(' ', '-', $withdrawal['METHOD'])) ?>">
                                             <?= formatPaymentMethod($withdrawal['METHOD']) ?>
                                         </span>
                                     </div>
@@ -309,7 +314,9 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                                 </td>
                                 <td>
                                     <div class="action-buttons">
-                                        <button class="btn-action btn-view" onclick="viewWithdrawalDetails(<?= $withdrawal['WITHDRAW_ID'] ?>)" title="View Details">
+                                        <button class="btn-action btn-view"
+                                            onclick="viewWithdrawalDetails(<?= $withdrawal['WITHDRAW_ID'] ?>)"
+                                            title="View Details">
                                             <i class="fas fa-eye"></i>
                                         </button>
                                     </div>
@@ -335,12 +342,14 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
         </div>
         <div class="modal-body">
             <?php foreach ($withdrawalHistory as $withdrawal): ?>
-                <div class="withdrawal-details-content" id="withdrawal-details-<?= $withdrawal['WITHDRAW_ID'] ?>" style="display: none;">
+                <div class="withdrawal-details-content" id="withdrawal-details-<?= $withdrawal['WITHDRAW_ID'] ?>"
+                    style="display: none;">
                     <div class="withdrawal-detail-section">
                         <h3>Transaction Information</h3>
                         <div class="detail-row">
                             <span class="detail-label">Withdrawal ID:</span>
-                            <span class="detail-value"><?= 'WD-' . str_pad($withdrawal['WITHDRAW_ID'], 6, '0', STR_PAD_LEFT) ?></span>
+                            <span
+                                class="detail-value"><?= 'WD-' . str_pad($withdrawal['WITHDRAW_ID'], 6, '0', STR_PAD_LEFT) ?></span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-label">Status:</span>
@@ -363,7 +372,8 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
                         <div class="detail-row">
                             <span class="detail-label">Withdrawal Method:</span>
                             <span class="detail-value">
-                                <span class="method-badge method-<?= strtolower(str_replace(' ', '-', $withdrawal['METHOD'])) ?>">
+                                <span
+                                    class="method-badge method-<?= strtolower(str_replace(' ', '-', $withdrawal['METHOD'])) ?>">
                                     <?= formatPaymentMethod($withdrawal['METHOD']) ?>
                                 </span>
                             </span>
@@ -394,7 +404,8 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
             <?php endforeach; ?>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" onclick="closeModal('withdrawalDetailsModal')">Close</button>
+            <button type="button" class="btn btn-secondary"
+                onclick="closeModal('withdrawalDetailsModal')">Close</button>
         </div>
     </div>
 </div>
@@ -520,7 +531,7 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
     }
 
     // Validate amount input
-    document.getElementById('withdrawalAmount')?.addEventListener('input', function() {
+    document.getElementById('withdrawalAmount')?.addEventListener('input', function () {
         const amount = parseFloat(this.value);
         const availableBalance = <?= $balanceInfo['CURRENT_BALANCE'] ?? 0 ?>;
         const minAmount = 100;
@@ -535,7 +546,7 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
     });
 
     // Initialize event listeners for withdrawals
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         // Real-time filtering for withdrawals
         const withdrawalSearch = document.getElementById("withdrawalSearch");
         const withdrawalStatusFilter = document.getElementById("statusFilter");
@@ -549,7 +560,7 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
             withdrawalStatusFilter.addEventListener("change", filterWithdrawals);
         }
         if (withdrawalDateRangeFilter) {
-            withdrawalDateRangeFilter.addEventListener("change", function() {
+            withdrawalDateRangeFilter.addEventListener("change", function () {
                 toggleWithdrawalCustomDateRange();
                 filterWithdrawals();
             });

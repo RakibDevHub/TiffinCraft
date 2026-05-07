@@ -91,35 +91,6 @@ include BASE_PATH . '/src/views/components/flash-popup.php';
     </div>
 </div>
 
-<!-- Active Filters Display -->
-<?php if (!empty($filters['search']) || !empty($filters['status'])): ?>
-    <div class="active-filters">
-        <?php if (!empty($filters['search'])): ?>
-            <span class="active-filter-tag">
-                Search: <?= htmlspecialchars($filters['search']) ?>
-                <a href="?<?= http_build_query(array_filter([
-                                'status' => $filters['status'] ?? '',
-                                'limit' => $limit
-                            ])) ?>" class="remove-filter">
-                    <i class="fas fa-times"></i>
-                </a>
-            </span>
-        <?php endif; ?>
-
-        <?php if (!empty($filters['status'])): ?>
-            <span class="active-filter-tag">
-                Status: <?= htmlspecialchars($filters['status']) ?>
-                <a href="?<?= http_build_query(array_filter([
-                                'search' => $filters['search'] ?? '',
-                                'limit' => $limit
-                            ])) ?>" class="remove-filter">
-                    <i class="fas fa-times"></i>
-                </a>
-            </span>
-        <?php endif; ?>
-    </div>
-<?php endif; ?>
-
 <!-- Withdrawals Table -->
 <div class="dashboard-card">
     <!-- Top Pagination -->

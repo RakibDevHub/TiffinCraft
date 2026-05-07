@@ -12,7 +12,7 @@ class Payment
     private $orderModel;
     private $kitchenModel;
     private $subscriptionModel;
-    
+
     private $sslCommerz;
 
     public function __construct($connection)
@@ -22,7 +22,7 @@ class Payment
         $this->orderModel = new Order($this->conn);
         $this->kitchenModel = new Kitchen($this->conn);
         $this->subscriptionModel = new Subscription($this->conn);
-    
+
         $this->sslCommerz = new SSLCommerz();
     }
 
@@ -192,7 +192,12 @@ class Payment
             'description' => $pendingTransaction['description'],
             'gateway_response' => json_encode($validationResult['gatewayResponse']),
             'message' => 'Payment validated successfully',
-            'metadata' => $pendingTransaction['metadata'] ?? ['reference_id' => $referenceId]
+            'metadata' => !empty($pendingTransaction['metadata']) && is_array($pendingTransaction['metadata'])
+                ? $pendingTransaction['metadata']
+                : [
+                    'reference_id' => $referenceId,
+                    'reference_type' => $referenceType
+                ],
         ]);
     }
 
@@ -208,12 +213,12 @@ class Payment
             'currency' => 'BDT',
             'transaction_type' => 'PAYMENT',
             'reference_type' => $referenceType,
-            'reference_id' => null, // NULL for failed transactions
+            'reference_id' => null,
             'payment_method' => 'sslcommerz',
             'status' => 'FAILED',
             'description' => $description,
             'gateway_response' => '{}',
-            'message' => substr($errorMessage, 0, 500), // Truncate to 500 chars
+            'message' => substr($errorMessage, 0, 500),
             'metadata' => ['failed_reason' => substr($errorMessage, 0, 500)]
         ], true);
     }
@@ -300,11 +305,11 @@ class Payment
         }
 
         return $this->subscriptionModel->createSub([
-            'seller_id'   => $subData['user_id'],
-            'plan_id'     => $metadata['plan_id'],
-            'start_date'  => date('Y-m-d'),
-            'end_date'    => date('Y-m-d', strtotime('+1 month')),
-            'status'      => 'ACTIVE',
+            'seller_id' => $subData['user_id'],
+            'plan_id' => $metadata['plan_id'],
+            'start_date' => date('Y-m-d'),
+            'end_date' => date('Y-m-d', strtotime('+1 month')),
+            'status' => 'ACTIVE',
             'change_type' => $metadata['subscription_type']
         ]);
     }
@@ -422,7 +427,7 @@ class Payment
             'fail_url' => $paymentData['fail_url'],
             'cancel_url' => $paymentData['cancel_url'],
             'value_a' => $type,
-            'value_b' => json_encode(array_merge($metadata, ['tran_id' => $tranId]))
+            'value_b' => array_merge($metadata, ['tran_id' => $tranId])
         ];
 
         if ($type === 'SUBSCRIPTION') {
